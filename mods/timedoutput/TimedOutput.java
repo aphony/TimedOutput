@@ -6,6 +6,7 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.EnumToolMaterial;
 import net.minecraft.item.Item;
 import net.minecraftforge.common.EnumHelper;
+import cpw.mods.fml.common.FMLLog;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.Init;
 import cpw.mods.fml.common.Mod.Instance;
@@ -52,14 +53,19 @@ public class TimedOutput
 	public static Block Button36000Ticks;
 	
 	@PreInit()
+	
 	public void preInit(FMLPreInitializationEvent event) {
+		
 
+		FMLLog.info("[TimedOutput] Loading Config");
+		
 		to_config.init();
 
 		to_config.initialize(event.getSuggestedConfigurationFile());
 
 		to_config.save(); 
 
+		FMLLog.info("[TimedOutput] Config Loaded");
 	}
 
 	@Init
@@ -73,6 +79,9 @@ public class TimedOutput
 
 	{
 
+
+		FMLLog.info("[TimedOutput] Adding Blocks");
+		
 		Button5Ticks = new mods.timedoutput.blocks.Button5Ticks(to_config.Button5TicksID).setHardness(1.0f).setResistance(50.0f).setCreativeTab(TimedOutputTab).setUnlocalizedName("Button5Ticks");
 		Button10Ticks = new mods.timedoutput.blocks.Button10Ticks(to_config.Button10TicksID).setHardness(1.0f).setResistance(50.0f).setCreativeTab(TimedOutputTab).setUnlocalizedName("Button10Ticks");
 		Button15Ticks = new mods.timedoutput.blocks.Button15Ticks(to_config.Button15TicksID).setHardness(1.0f).setResistance(50.0f).setCreativeTab(TimedOutputTab).setUnlocalizedName("Button15Ticks");

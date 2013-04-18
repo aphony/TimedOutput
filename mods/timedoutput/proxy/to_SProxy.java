@@ -7,6 +7,8 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
 import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.network.IGuiHandler;
+import cpw.mods.fml.common.registry.TickRegistry;
+import cpw.mods.fml.relauncher.Side;
 
 public class to_SProxy 
 implements IGuiHandler{
@@ -34,28 +36,12 @@ implements IGuiHandler{
 
 		return null;
 	} 
-
-	  public void registerTiles()
-	  {
-	  }
-
-	  public void registerBlocks()
-	  {
-	  }
-
-	  public void addNames()
-	  {
-	  }
-
-	  public void addRecipes()
-	  {
-	  }
 	  
 	  public String getCurrentLanguage() {
 			return null;
 		}
 
-	  public File getStoreMoreBase() {
+	  public File getTimeButtonBase() {
 			return new File("./");
 		}
 
@@ -64,7 +50,9 @@ implements IGuiHandler{
 		return TimedOutput.MOD + ":" + TextureName;
 		}
 
-
+		public void registerServerTickHandler(){
+			TickRegistry.registerTickHandler(new ServerTickHandler(), Side.SERVER);
+		}
 
 
 }
