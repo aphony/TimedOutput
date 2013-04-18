@@ -352,23 +352,6 @@ public abstract class TimedButtonBase extends Block
         this.setBlockBounds(0.5F - f, 0.5F - f1, 0.5F - f2, 0.5F + f, 0.5F + f1, 0.5F + f2);
     }
 
-    /**
-     * Triggered whenever an entity collides with this block (enters into the block). Args: world, x, y, z, entity
-     */
-    public void onEntityCollidedWithBlock(World par1World, int par2, int par3, int par4, Entity par5Entity)
-    {
-        if (!par1World.isRemote)
-        {
-            if (this.sensible)
-            {
-                if ((par1World.getBlockMetadata(par2, par3, par4) & 8) == 0)
-                {
-                    this.func_82535_o(par1World, par2, par3, par4);
-                }
-            }
-        }
-    }
-
     protected void func_82535_o(World par1World, int par2, int par3, int par4)
     {
         int l = par1World.getBlockMetadata(par2, par3, par4);
