@@ -36,7 +36,7 @@ public class TimedOutput
 	//Buttons
 	public static Block Button5Ticks;
 	public static Block Button10Ticks;
-	public static Block Button15Ticks;/*
+	public static Block Button15Ticks;
 	public static Block Button20Ticks;
 	public static Block Button25Ticks;
 	public static Block Button30Ticks;
@@ -50,7 +50,7 @@ public class TimedOutput
 	public static Block Button70Ticks;
 	public static Block Button75Ticks;
 	public static Block Button80Ticks;
-	*/
+	
 	@PreInit()
 	public void preInit(FMLPreInitializationEvent event) {
 
@@ -73,11 +73,10 @@ public class TimedOutput
 
 	{
 
-		//TESTING
 		Button5Ticks = new mods.timedoutput.blocks.Button5Ticks(to_config.Button5TicksID).setHardness(1.0f).setResistance(50.0f).setCreativeTab(TimedOutputTab).setUnlocalizedName("Button5Ticks");
 		Button10Ticks = new mods.timedoutput.blocks.Button10Ticks(to_config.Button10TicksID).setHardness(1.0f).setResistance(50.0f).setCreativeTab(TimedOutputTab).setUnlocalizedName("Button10Ticks");
 		Button15Ticks = new mods.timedoutput.blocks.Button15Ticks(to_config.Button15TicksID).setHardness(1.0f).setResistance(50.0f).setCreativeTab(TimedOutputTab).setUnlocalizedName("Button15Ticks");
-		/*Button20Ticks = new mods.timedoutput.blocks.Button20Ticks(to_config.Button20TicksID).setHardness(1.0f).setResistance(50.0f).setCreativeTab(TimedOutputTab).setUnlocalizedName("Button20Ticks");
+		Button20Ticks = new mods.timedoutput.blocks.Button20Ticks(to_config.Button20TicksID).setHardness(1.0f).setResistance(50.0f).setCreativeTab(TimedOutputTab).setUnlocalizedName("Button20Ticks");
 		Button25Ticks = new mods.timedoutput.blocks.Button25Ticks(to_config.Button25TicksID).setHardness(1.0f).setResistance(50.0f).setCreativeTab(TimedOutputTab).setUnlocalizedName("Button25Ticks");
 		Button30Ticks = new mods.timedoutput.blocks.Button30Ticks(to_config.Button30TicksID).setHardness(1.0f).setResistance(50.0f).setCreativeTab(TimedOutputTab).setUnlocalizedName("Button30Ticks");
 		Button35Ticks = new mods.timedoutput.blocks.Button35Ticks(to_config.Button35TicksID).setHardness(1.0f).setResistance(50.0f).setCreativeTab(TimedOutputTab).setUnlocalizedName("Button35Ticks");
@@ -89,24 +88,24 @@ public class TimedOutput
 		Button65Ticks = new mods.timedoutput.blocks.Button65Ticks(to_config.Button65TicksID).setHardness(1.0f).setResistance(50.0f).setCreativeTab(TimedOutputTab).setUnlocalizedName("Button65Ticks");
 		Button70Ticks = new mods.timedoutput.blocks.Button70Ticks(to_config.Button70TicksID).setHardness(1.0f).setResistance(50.0f).setCreativeTab(TimedOutputTab).setUnlocalizedName("Button70Ticks");
 		Button75Ticks = new mods.timedoutput.blocks.Button75Ticks(to_config.Button75TicksID).setHardness(1.0f).setResistance(50.0f).setCreativeTab(TimedOutputTab).setUnlocalizedName("Button75Ticks");
-		Button80Ticks = new mods.timedoutput.blocks.Button80Ticks(to_config.Button80TicksID).setHardness(1.0f).setResistance(50.0f).setCreativeTab(TimedOutputTab).setUnlocalizedName("Button80Ticks");*/
+		Button80Ticks = new mods.timedoutput.blocks.Button80Ticks(to_config.Button80TicksID).setHardness(1.0f).setResistance(50.0f).setCreativeTab(TimedOutputTab).setUnlocalizedName("Button80Ticks");
 
 		Item.itemsList[to_config.Button5TicksID] = new mods.timedoutput.blocks.Button5TicksItem(to_config.Button5TicksID-256).setUnlocalizedName("Button5Ticks");
 		Item.itemsList[to_config.Button10TicksID] = new mods.timedoutput.blocks.Button10TicksItem(to_config.Button10TicksID-256).setUnlocalizedName("Button10Ticks");
-		Item.itemsList[to_config.Button15TicksID] = new mods.timedoutput.blocks.Button15TicksITem(to_config.Button15TicksID-256).setUnlocalizedName("Button15Ticks");
-		/*Item.itemsList[to_config.Button20TicksID] = new TestButton2Item(to_config.Button20TicksID-256).setUnlocalizedName("Button20Ticks");
-		Item.itemsList[to_config.Button25TicksID] = new TestButton1Item(to_config.Button25TicksID-256).setUnlocalizedName("Button25Ticks");
-		Item.itemsList[to_config.Button30TicksID] = new TestButton2Item(to_config.Button30TicksID-256).setUnlocalizedName("Button30Ticks");
-		Item.itemsList[to_config.Button35TicksID] = new TestButton1Item(to_config.Button35TicksID-256).setUnlocalizedName("Button35Ticks");
-		Item.itemsList[to_config.Button40TicksID] = new TestButton2Item(to_config.Button40TicksID-256).setUnlocalizedName("Button40Ticks");
-		Item.itemsList[to_config.Button45TicksID] = new TestButton1Item(to_config.Button45TicksID-256).setUnlocalizedName("Button45Ticks");
-		Item.itemsList[to_config.Button50TicksID] = new TestButton2Item(to_config.Button50TicksID-256).setUnlocalizedName("Button50Ticks");
-		Item.itemsList[to_config.Button55TicksID] = new TestButton1Item(to_config.Button55TicksID-256).setUnlocalizedName("Button55Ticks");
-		Item.itemsList[to_config.Button60TicksID] = new TestButton2Item(to_config.Button60TicksID-256).setUnlocalizedName("Button60Ticks");
-		Item.itemsList[to_config.Button65TicksID] = new TestButton1Item(to_config.Button65TicksID-256).setUnlocalizedName("Button65Ticks");
-		Item.itemsList[to_config.Button70TicksID] = new TestButton2Item(to_config.Button70TicksID-256).setUnlocalizedName("Button70Ticks");
-		Item.itemsList[to_config.Button75TicksID] = new TestButton1Item(to_config.Button75TicksID-256).setUnlocalizedName("Button75Ticks");
-		Item.itemsList[to_config.Button80TicksID] = new TestButton2Item(to_config.Button80TicksID-256).setUnlocalizedName("Button80Ticks");*/
+		Item.itemsList[to_config.Button15TicksID] = new mods.timedoutput.blocks.Button15TicksItem(to_config.Button15TicksID-256).setUnlocalizedName("Button15Ticks");
+		Item.itemsList[to_config.Button20TicksID] = new mods.timedoutput.blocks.Button20TicksItem(to_config.Button20TicksID-256).setUnlocalizedName("Button20Ticks");
+		Item.itemsList[to_config.Button25TicksID] = new mods.timedoutput.blocks.Button25TicksItem(to_config.Button25TicksID-256).setUnlocalizedName("Button25Ticks");
+		Item.itemsList[to_config.Button30TicksID] = new mods.timedoutput.blocks.Button30TicksItem(to_config.Button30TicksID-256).setUnlocalizedName("Button30Ticks");
+		Item.itemsList[to_config.Button35TicksID] = new mods.timedoutput.blocks.Button35TicksItem(to_config.Button35TicksID-256).setUnlocalizedName("Button35Ticks");
+		Item.itemsList[to_config.Button40TicksID] = new mods.timedoutput.blocks.Button40TicksItem(to_config.Button40TicksID-256).setUnlocalizedName("Button40Ticks");
+		Item.itemsList[to_config.Button45TicksID] = new mods.timedoutput.blocks.Button45TicksItem(to_config.Button45TicksID-256).setUnlocalizedName("Button45Ticks");
+		Item.itemsList[to_config.Button50TicksID] = new mods.timedoutput.blocks.Button50TicksItem(to_config.Button50TicksID-256).setUnlocalizedName("Button50Ticks");
+		Item.itemsList[to_config.Button55TicksID] = new mods.timedoutput.blocks.Button55TicksItem(to_config.Button55TicksID-256).setUnlocalizedName("Button55Ticks");
+		Item.itemsList[to_config.Button60TicksID] = new mods.timedoutput.blocks.Button60TicksItem(to_config.Button60TicksID-256).setUnlocalizedName("Button60Ticks");
+		Item.itemsList[to_config.Button65TicksID] = new mods.timedoutput.blocks.Button65TicksItem(to_config.Button65TicksID-256).setUnlocalizedName("Button65Ticks");
+		Item.itemsList[to_config.Button70TicksID] = new mods.timedoutput.blocks.Button70TicksItem(to_config.Button70TicksID-256).setUnlocalizedName("Button70Ticks");
+		Item.itemsList[to_config.Button75TicksID] = new mods.timedoutput.blocks.Button75TicksItem(to_config.Button75TicksID-256).setUnlocalizedName("Button75Ticks");
+		Item.itemsList[to_config.Button80TicksID] = new mods.timedoutput.blocks.Button80TicksItem(to_config.Button80TicksID-256).setUnlocalizedName("Button80Ticks");
 		
 	
 	}
