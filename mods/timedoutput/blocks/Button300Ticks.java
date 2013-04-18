@@ -17,7 +17,7 @@ public class Button300Ticks extends TimedButtonBase
     @Override
     public int tickRate(World par1World)
     {
-        return this.sensible ? 300 : 0;
+        return this.sensible ? 300 : 300;
     }
     @SideOnly(Side.CLIENT)
 

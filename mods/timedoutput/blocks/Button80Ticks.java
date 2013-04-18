@@ -17,7 +17,7 @@ public class Button80Ticks extends TimedButtonBase
     @Override
     public int tickRate(World par1World)
     {
-        return this.sensible ? 80 : 0;
+        return this.sensible ? 80 : 80;
     }
     @SideOnly(Side.CLIENT)
 
