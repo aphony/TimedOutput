@@ -7,15 +7,15 @@ import net.minecraft.util.Icon;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class Button45TicksItem extends ItemBlock {
+public class Button200TicksItem extends ItemBlock {
 
-	public Button45TicksItem(int par1) {
+	public Button200TicksItem(int par1) {
 		super(par1);
 		setHasSubtypes(true);
 	}
 	public String getUnlocalizedName(ItemStack i){
         switch(i.getItemDamage()){
-        case 0:return "Button45Ticks";
+        case 0:return "Button200Ticks";
         default:return "";
         }
 	}

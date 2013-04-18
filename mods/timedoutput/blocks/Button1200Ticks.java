@@ -7,9 +7,9 @@ import net.minecraft.block.Block;
 import net.minecraft.util.Icon;
 import net.minecraft.world.World;
 
-public class Button35Ticks extends TimedButtonBase
+public class Button1200Ticks extends TimedButtonBase
 {
-    public Button35Ticks(int par1)
+    public Button1200Ticks(int par1)
     {
         super(par1, true);
     }
@@ -17,7 +17,7 @@ public class Button35Ticks extends TimedButtonBase
     @Override
     public int tickRate(World par1World)
     {
-        return this.sensible ? 35 : 0;
+        return this.sensible ? 1200 : 0;
     }
     @SideOnly(Side.CLIENT)
 
@@ -26,6 +26,6 @@ public class Button35Ticks extends TimedButtonBase
      */
     public Icon getBlockTextureFromSideAndMetadata(int par1, int par2)
     {
-        return Block.stone.getBlockTextureFromSide(1);
+        return Block.blockGold.getBlockTextureFromSide(1);
     }
 }
