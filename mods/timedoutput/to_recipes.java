@@ -1,6 +1,5 @@
 package mods.timedoutput;
 
-import mods.storemore.StoreMore;
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;
 import cpw.mods.fml.common.registry.GameRegistry;
