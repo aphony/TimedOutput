@@ -26,6 +26,6 @@ public class Button35Ticks extends TimedButtonBase
      */
     public Icon getBlockTextureFromSideAndMetadata(int par1, int par2)
     {
-        return Block.cloth.getBlockTextureFromSide(5);
+        return Block.stone.getBlockTextureFromSide(1);
     }
 }
