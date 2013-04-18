@@ -15,7 +15,7 @@ public class Button35TicksItem extends ItemBlock {
 	}
 	public String getUnlocalizedName(ItemStack i){
         switch(i.getItemDamage()){
-        case 0:return "Button30Ticks";
+        case 0:return "Button35Ticks";
         default:return "";
         }
 	}
