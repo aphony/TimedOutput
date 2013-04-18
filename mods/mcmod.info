@@ -1,0 +1,19 @@
+[
+{
+   "modid": "TimedOutput",
+   "name": "TimedOutput",
+   "description": "Because there's a schedule to keep.",
+   "version": "0.1.0 Alpha",
+   "credits": "",
+   "logoFile": "",
+   "mcversion": "",
+   "url": "",
+   "updateUrl": "",
+   "authors": [ "aphony_" ],
+   "parent":"",
+   "screenshots": [],
+   "dependencies": [
+     "mod_MinecraftForge"
+  ]
+}
+]
