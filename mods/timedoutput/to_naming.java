@@ -17,6 +17,8 @@ public class to_naming {
         LanguageRegistry.instance().addName(new ItemStack(TimedOutput.Button60Ticks), "Three Second Signal Button");
         LanguageRegistry.instance().addName(new ItemStack(TimedOutput.Button80Ticks), "Four Second Signal Button");
         LanguageRegistry.instance().addName(new ItemStack(TimedOutput.Button100Ticks), "Five Second Signal Button");
+        LanguageRegistry.instance().addName(new ItemStack(TimedOutput.ZeroDelayLampOff), "Zero Delay Lamp");
+        LanguageRegistry.instance().addName(new ItemStack(TimedOutput.ZeroDelayLampOn), "Zero Delay Lamp");
 
     }
 		
