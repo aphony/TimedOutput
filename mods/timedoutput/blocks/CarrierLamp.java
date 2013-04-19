@@ -218,8 +218,6 @@ public class CarrierLamp extends Block
             this.notifyWireNeighborsOfNeighborChange(par1World, par2 + 1, par3, par4);
             this.notifyWireNeighborsOfNeighborChange(par1World, par2, par3, par4 - 1);
             this.notifyWireNeighborsOfNeighborChange(par1World, par2, par3, par4 + 1);
-            this.notifyWireNeighborsOfNeighborChange(par1World, par2, par3 - 1, par4);
-            this.notifyWireNeighborsOfNeighborChange(par1World, par2, par3 + 1, par4);
 
             if (par1World.isBlockNormalCube(par2 - 1, par3, par4))
             {
@@ -300,8 +298,6 @@ public class CarrierLamp extends Block
             this.notifyWireNeighborsOfNeighborChange(par1World, par2 + 1, par3, par4);
             this.notifyWireNeighborsOfNeighborChange(par1World, par2, par3, par4 - 1);
             this.notifyWireNeighborsOfNeighborChange(par1World, par2, par3, par4 + 1);
-            this.notifyWireNeighborsOfNeighborChange(par1World, par2, par3 - 1, par4);
-            this.notifyWireNeighborsOfNeighborChange(par1World, par2, par3 + 1, par4);
 
             if (par1World.isBlockNormalCube(par2 - 1, par3, par4))
             {
@@ -479,7 +475,7 @@ public class CarrierLamp extends Block
     {
         int i1 = par0IBlockAccess.getBlockId(par1, par2, par3);
 
-        if (i1 == TimedOutput.CarrierLampOff.blockID)
+        if (i1 == Block.redstoneWire.blockID)
         {
             return true;
         }
@@ -565,7 +561,7 @@ public class CarrierLamp extends Block
         {
             int i1 = par0IBlockAccess.getBlockId(par1, par2, par3);
 
-            if (i1 == TimedOutput.CarrierLampOff.blockID)
+            if (i1 == TimedOutput.CarrierLampOn.blockID)
             {
                 int j1 = par0IBlockAccess.getBlockMetadata(par1, par2, par3);
                 return par4 == (j1 & 3);
