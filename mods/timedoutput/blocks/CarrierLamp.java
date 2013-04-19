@@ -77,7 +77,7 @@ public class CarrierLamp extends Block
         {
             if (this.powered && !par1World.isBlockIndirectlyGettingPowered(par2, par3, par4))
             {
-                par1World.scheduleBlockUpdate(par2, par3, par4, this.blockID, 0);
+                par1World.scheduleBlockUpdate(par2, par3, par4, this.blockID, 100);
             }
             else if (!this.powered && par1World.isBlockIndirectlyGettingPowered(par2, par3, par4))
             {
@@ -244,7 +244,7 @@ public class CarrierLamp extends Block
             }
             else
             {
-                this.dropBlockAsItem(par1World, par2, par3, par4, 0, 0);
+                this.dropBlockAsItem(par1World, par2, par3, par4, 0, 100);
                 par1World.setBlockToAir(par2, par3, par4);
             }
 
@@ -262,7 +262,7 @@ public class CarrierLamp extends Block
         {
             if (this.powered && !par1World.isBlockIndirectlyGettingPowered(par2, par3, par4))
             {
-                par1World.scheduleBlockUpdate(par2, par3, par4, this.blockID, 2);
+                par1World.scheduleBlockUpdate(par2, par3, par4, this.blockID, 100);
             }
             else if (!this.powered && par1World.isBlockIndirectlyGettingPowered(par2, par3, par4))
             {
