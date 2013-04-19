@@ -57,7 +57,7 @@ public class ZeroDelayLamp extends Block
             }
             else if (!this.powered && par1World.isBlockIndirectlyGettingPowered(par2, par3, par4))
             {
-                par1World.setBlock(par2, par3, par4, TimedOutput.ZeroDelayLampOn.blockID, 0, 2);
+                par1World.setBlock(par2, par3, par4, TimedOutput.ZeroDelayLampOn.blockID, 0, 0);
             }
         }
     }
@@ -76,7 +76,7 @@ public class ZeroDelayLamp extends Block
             }
             else if (!this.powered && par1World.isBlockIndirectlyGettingPowered(par2, par3, par4))
             {
-                par1World.setBlock(par2, par3, par4, TimedOutput.ZeroDelayLampOn.blockID, 0, 2);
+                par1World.setBlock(par2, par3, par4, TimedOutput.ZeroDelayLampOn.blockID, 0, 0);
             }
         }
     }
@@ -88,7 +88,7 @@ public class ZeroDelayLamp extends Block
     {
         if (!par1World.isRemote && this.powered && !par1World.isBlockIndirectlyGettingPowered(par2, par3, par4))
         {
-            par1World.setBlock(par2, par3, par4, TimedOutput.ZeroDelayLampOff.blockID, 0, 2);
+            par1World.setBlock(par2, par3, par4, TimedOutput.ZeroDelayLampOff.blockID, 0, 0);
         }
     }
 
