@@ -17,15 +17,7 @@ public class to_recipes {
 		GameRegistry.addShapelessRecipe(new ItemStack(TimedOutput.Button80Ticks), new ItemStack(TimedOutput.Button60Ticks));
 		GameRegistry.addShapelessRecipe(new ItemStack(TimedOutput.Button100Ticks), new ItemStack(TimedOutput.Button80Ticks));
 		GameRegistry.addShapelessRecipe(new ItemStack(Block.woodenButton), new ItemStack(TimedOutput.Button100Ticks));
-		GameRegistry.addShapelessRecipe(new ItemStack(TimedOutput.PressurePlate5Ticks), new ItemStack(Block.pressurePlatePlanks));
-		GameRegistry.addShapelessRecipe(new ItemStack(TimedOutput.PressurePlate10Ticks), new ItemStack(TimedOutput.PressurePlate5Ticks));
-		GameRegistry.addShapelessRecipe(new ItemStack(TimedOutput.PressurePlate15Ticks), new ItemStack(TimedOutput.PressurePlate10Ticks));
-		GameRegistry.addShapelessRecipe(new ItemStack(TimedOutput.PressurePlate20Ticks), new ItemStack(TimedOutput.PressurePlate15Ticks));
-		GameRegistry.addShapelessRecipe(new ItemStack(TimedOutput.PressurePlate40Ticks), new ItemStack(TimedOutput.PressurePlate20Ticks));
-		GameRegistry.addShapelessRecipe(new ItemStack(TimedOutput.PressurePlate60Ticks), new ItemStack(TimedOutput.PressurePlate40Ticks));
-		GameRegistry.addShapelessRecipe(new ItemStack(TimedOutput.PressurePlate80Ticks), new ItemStack(TimedOutput.PressurePlate60Ticks));
-		GameRegistry.addShapelessRecipe(new ItemStack(TimedOutput.PressurePlate100Ticks), new ItemStack(TimedOutput.PressurePlate80Ticks));
-		GameRegistry.addShapelessRecipe(new ItemStack(Block.pressurePlatePlanks), new ItemStack(TimedOutput.PressurePlate100Ticks));
+		GameRegistry.addShapelessRecipe(new ItemStack(TimedOutput.ZeroDelayLampOff), new ItemStack(Block.redstoneLampActive));
 		
 	}
 

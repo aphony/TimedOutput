@@ -1,7 +1,9 @@
 package mods.timedoutput;
 
+import mods.timedoutput.blocks.ZeroDelayLamp;
 import mods.timedoutput.proxy.to_SProxy;
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockRedstoneLight;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.EnumToolMaterial;
 import net.minecraft.item.Item;
@@ -47,14 +49,8 @@ public class TimedOutput
 	public static Block Button60Ticks;
 	public static Block Button80Ticks;
 	public static Block Button100Ticks;
-	public static Block PressurePlate5Ticks;
-	public static Block PressurePlate10Ticks;
-	public static Block PressurePlate15Ticks;
-	public static Block PressurePlate20Ticks;
-	public static Block PressurePlate40Ticks;
-	public static Block PressurePlate60Ticks;
-	public static Block PressurePlate80Ticks;
-	public static Block PressurePlate100Ticks;
+	public static Block ZeroDelayLampOff;
+	public static Block ZeroDelayLampOn;
 	
 	
 	@PreInit()
@@ -93,16 +89,10 @@ public class TimedOutput
 		Button40Ticks = new mods.timedoutput.blocks.Button40Ticks(to_config.Button40TicksID).setHardness(1.0f).setResistance(50.0f).setCreativeTab(TimedOutputTab).setUnlocalizedName("Button40Ticks");
 		Button60Ticks = new mods.timedoutput.blocks.Button60Ticks(to_config.Button60TicksID).setHardness(1.0f).setResistance(50.0f).setCreativeTab(TimedOutputTab).setUnlocalizedName("Button60Ticks");
 		Button80Ticks = new mods.timedoutput.blocks.Button80Ticks(to_config.Button80TicksID).setHardness(1.0f).setResistance(50.0f).setCreativeTab(TimedOutputTab).setUnlocalizedName("Button80Ticks");
-		Button100Ticks = new mods.timedoutput.blocks.Button100Ticks(to_config.Button100TicksID).setHardness(1.0f).setResistance(50.0f).setCreativeTab(TimedOutputTab).setUnlocalizedName("Button100Ticks");		
-		PressurePlate5Ticks = new mods.timedoutput.blocks.PressurePlate5Ticks(to_config.PressurePlate5TicksID, null, null, null).setHardness(1.0f).setResistance(50.0f).setCreativeTab(TimedOutputTab).setUnlocalizedName("PressurePlate5Ticks");
-		PressurePlate10Ticks = new mods.timedoutput.blocks.PressurePlate10Ticks(to_config.PressurePlate10TicksID, null, null, null).setHardness(1.0f).setResistance(50.0f).setCreativeTab(TimedOutputTab).setUnlocalizedName("PressurePlate10Ticks");
-		PressurePlate15Ticks = new mods.timedoutput.blocks.PressurePlate15Ticks(to_config.PressurePlate15TicksID, null, null, null).setHardness(1.0f).setResistance(50.0f).setCreativeTab(TimedOutputTab).setUnlocalizedName("PressurePlate15Ticks");
-		PressurePlate20Ticks = new mods.timedoutput.blocks.PressurePlate20Ticks(to_config.PressurePlate20TicksID, null, null, null).setHardness(1.0f).setResistance(50.0f).setCreativeTab(TimedOutputTab).setUnlocalizedName("PressurePlate20Ticks");
-		PressurePlate40Ticks = new mods.timedoutput.blocks.PressurePlate40Ticks(to_config.PressurePlate40TicksID, null, null, null).setHardness(1.0f).setResistance(50.0f).setCreativeTab(TimedOutputTab).setUnlocalizedName("PressurePlate40Ticks");
-		PressurePlate60Ticks = new mods.timedoutput.blocks.PressurePlate60Ticks(to_config.PressurePlate60TicksID, null, null, null).setHardness(1.0f).setResistance(50.0f).setCreativeTab(TimedOutputTab).setUnlocalizedName("PressurePlate60Ticks");
-		PressurePlate80Ticks = new mods.timedoutput.blocks.PressurePlate80Ticks(to_config.PressurePlate80TicksID, null, null, null).setHardness(1.0f).setResistance(50.0f).setCreativeTab(TimedOutputTab).setUnlocalizedName("PressurePlate80Ticks");
-		PressurePlate100Ticks = new mods.timedoutput.blocks.PressurePlate100Ticks(to_config.PressurePlate100TicksID, null, null, null).setHardness(1.0f).setResistance(50.0f).setCreativeTab(TimedOutputTab).setUnlocalizedName("PressurePlate100Ticks");
-
+		Button100Ticks = new mods.timedoutput.blocks.Button100Ticks(to_config.Button100TicksID).setHardness(1.0f).setResistance(50.0f).setCreativeTab(TimedOutputTab).setUnlocalizedName("Button100Ticks");
+	    ZeroDelayLampOff = new ZeroDelayLamp(to_config.ZeroDelayLampOffID, false).setHardness(0.3F).setResistance(1.0f).setCreativeTab(TimedOutput.TimedOutputTab).setUnlocalizedName("ZeroDelayLampOff");
+	    ZeroDelayLampOn = new ZeroDelayLamp(to_config.ZeroDelayLampOnID, true).setHardness(0.3F).setResistance(1.0f).setCreativeTab(TimedOutput.TimedOutputTab).setUnlocalizedName("ZeroDelayLampOn");
+	
 		Item.itemsList[to_config.Button5TicksID] = new mods.timedoutput.blocks.Button5TicksItem(to_config.Button5TicksID-256).setUnlocalizedName("Button5Ticks");
 		Item.itemsList[to_config.Button10TicksID] = new mods.timedoutput.blocks.Button10TicksItem(to_config.Button10TicksID-256).setUnlocalizedName("Button10Ticks");
 		Item.itemsList[to_config.Button15TicksID] = new mods.timedoutput.blocks.Button15TicksItem(to_config.Button15TicksID-256).setUnlocalizedName("Button15Ticks");
@@ -111,14 +101,8 @@ public class TimedOutput
 		Item.itemsList[to_config.Button60TicksID] = new mods.timedoutput.blocks.Button60TicksItem(to_config.Button60TicksID-256).setUnlocalizedName("Button60Ticks");
 		Item.itemsList[to_config.Button80TicksID] = new mods.timedoutput.blocks.Button80TicksItem(to_config.Button80TicksID-256).setUnlocalizedName("Button80Ticks");
 		Item.itemsList[to_config.Button100TicksID] = new mods.timedoutput.blocks.Button100TicksItem(to_config.Button100TicksID-256).setUnlocalizedName("Button100Ticks");
-		Item.itemsList[to_config.PressurePlate5TicksID] = new mods.timedoutput.blocks.PressurePlate5TicksItem(to_config.PressurePlate5TicksID-256).setUnlocalizedName("PressurePlate5Ticks");
-		Item.itemsList[to_config.PressurePlate10TicksID] = new mods.timedoutput.blocks.PressurePlate10TicksItem(to_config.PressurePlate10TicksID-256).setUnlocalizedName("PressurePlate10Ticks");
-		Item.itemsList[to_config.PressurePlate15TicksID] = new mods.timedoutput.blocks.PressurePlate15TicksItem(to_config.PressurePlate15TicksID-256).setUnlocalizedName("PressurePlate15Ticks");
-		Item.itemsList[to_config.PressurePlate20TicksID] = new mods.timedoutput.blocks.PressurePlate20TicksItem(to_config.PressurePlate20TicksID-256).setUnlocalizedName("PressurePlate20Ticks");
-		Item.itemsList[to_config.PressurePlate40TicksID] = new mods.timedoutput.blocks.PressurePlate40TicksItem(to_config.PressurePlate40TicksID-256).setUnlocalizedName("PressurePlate40Ticks");
-		Item.itemsList[to_config.PressurePlate60TicksID] = new mods.timedoutput.blocks.PressurePlate60TicksItem(to_config.PressurePlate60TicksID-256).setUnlocalizedName("PressurePlate60Ticks");
-		Item.itemsList[to_config.PressurePlate80TicksID] = new mods.timedoutput.blocks.PressurePlate80TicksItem(to_config.PressurePlate80TicksID-256).setUnlocalizedName("PressurePlate80Ticks");
-		Item.itemsList[to_config.PressurePlate100TicksID] = new mods.timedoutput.blocks.PressurePlate100TicksItem(to_config.PressurePlate100TicksID-256).setUnlocalizedName("PressurePlate100Ticks");
+		Item.itemsList[to_config.ZeroDelayLampOffID] = new mods.timedoutput.blocks.Button80TicksItem(to_config.ZeroDelayLampOffID-256).setUnlocalizedName("ZeroDelayLampOff");
+		Item.itemsList[to_config.ZeroDelayLampOnID] = new mods.timedoutput.blocks.Button100TicksItem(to_config.ZeroDelayLampOnID-256).setUnlocalizedName("ZeroDelayLampOn");
 	
 	}
 
