@@ -24,8 +24,10 @@ public static void init() {
 		public static int Button100TicksID = 1357;
 		public static int ZeroDelayLampOffID = 1360;
 		public static int ZeroDelayLampOnID = 1361;
-		public static int DelayedLamp_10SecOffID = 1362;
-		public static int DelayedLamp_10SecOnID = 1363;
+		public static int DelayedLamp_5MinOffID = 1362;
+		public static int DelayedLamp_5MinOnID = 1363;
+		public static int CarrierLampOffID = 1400;
+		public static int CarrierLampOnID = 1401;
 		
 	
 
@@ -43,8 +45,10 @@ public static void init() {
 		    Button100TicksID = config.get("Timed Buttons", "Five Second Button", 1357).getInt();
 		    ZeroDelayLampOffID = config.get("Lamps", "Zero Delay Lamp Off", 1360).getInt();
 		    ZeroDelayLampOnID = config.get("Lamps", "Zero Delay Lamp On", 1361).getInt();
-		    DelayedLamp_10SecOffID = config.get("Lamps", "10 Second Off Delay Lamp", 1362).getInt();
-		    DelayedLamp_10SecOnID = config.get("Lamps", "10 Second On Delay Lamp", 1363).getInt();
+		    DelayedLamp_5MinOffID = config.get("Lamps", "5 Minute Off Delay Lamp (Off)", 1362).getInt();
+		    DelayedLamp_5MinOnID = config.get("Lamps", "5 Minute Off Delay Lamp (On)", 1363).getInt();
+		    CarrierLampOffID = config.get("Lamps", "Carrier Lamp (Off)", 1400).getInt();
+		    CarrierLampOnID = config.get("Lamps", "Carrier Lamp (On)", 1401).getInt();
 
 		    
 		    config.save();
