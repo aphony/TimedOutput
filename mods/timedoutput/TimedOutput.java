@@ -100,8 +100,8 @@ public class TimedOutput
 	    ZeroDelayLampOn = new ZeroDelayLamp(to_config.ZeroDelayLampOnID, true).setHardness(0.3F).setResistance(1.0f).setCreativeTab(TimedOutput.TimedOutputTab).setUnlocalizedName("ZeroDelayLampOn");
 	    DelayedLamp_5MinOff = new DelayedLamp_5Min(to_config.DelayedLamp_5MinOffID, false).setHardness(0.3F).setResistance(1.0f).setCreativeTab(TimedOutput.TimedOutputTab).setUnlocalizedName("DelayedLamp_5MinOff");
 	    DelayedLamp_5MinOn = new DelayedLamp_5Min(to_config.DelayedLamp_5MinOnID, true).setHardness(0.3F).setResistance(1.0f).setCreativeTab(TimedOutput.TimedOutputTab).setUnlocalizedName("DelayedLamp_5MinOn");
-	    CarrierLampOff = new CarrierLamp(to_config.CarrierLampOffID, false, true).setHardness(0.3F).setResistance(1.0f).setCreativeTab(TimedOutput.TimedOutputTab).setUnlocalizedName("CarrierLampOff");
-	    CarrierLampOn = new CarrierLamp(to_config.CarrierLampOnID, true, true).setHardness(0.3F).setResistance(1.0f).setCreativeTab(TimedOutput.TimedOutputTab).setUnlocalizedName("CarrierLampOn");
+	    CarrierLampOff = new CarrierLamp(to_config.CarrierLampOffID, false).setHardness(0.3F).setResistance(1.0f).setCreativeTab(TimedOutput.TimedOutputTab).setUnlocalizedName("CarrierLampOff");
+	    CarrierLampOn = new CarrierLamp(to_config.CarrierLampOnID, true).setHardness(0.3F).setResistance(1.0f).setCreativeTab(TimedOutput.TimedOutputTab).setUnlocalizedName("CarrierLampOn");
 	
 		Item.itemsList[to_config.Button5TicksID] = new mods.timedoutput.blocks.Button5TicksItem(to_config.Button5TicksID-256).setUnlocalizedName("Button5Ticks");
 		Item.itemsList[to_config.Button10TicksID] = new mods.timedoutput.blocks.Button10TicksItem(to_config.Button10TicksID-256).setUnlocalizedName("Button10Ticks");

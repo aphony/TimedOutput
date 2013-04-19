@@ -2,6 +2,7 @@ package mods.timedoutput.blocks;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Random;
@@ -11,8 +12,6 @@ import mods.timedoutput.TimedOutput;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
-import net.minecraft.item.Item;
-import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.Direction;
 import net.minecraft.util.Icon;
 import net.minecraft.world.ChunkPosition;
@@ -22,9 +21,7 @@ import net.minecraft.world.World;
 public class CarrierLamp extends Block
 {
 	
-    /** Whether this lamp block is the powered version. */
-    private final boolean powered;
-    /**
+	/**
      * When false, power transmission methods do not look at other redstone wires. Used internally during
      * updateCurrentStrength.
      */
@@ -38,42 +35,37 @@ public class CarrierLamp extends Block
     private Icon field_94411_cP;
     @SideOnly(Side.CLIENT)
     private Icon field_94412_cQ;
+    
+    /** Whether this lamp block is the powered version. */
+    private final boolean powered;
 
-    public CarrierLamp(int par1, boolean powered, boolean provider)
+    public CarrierLamp(int par1, boolean par2)
     {
-    	super(par1, Material.redstoneLight);
-        this.powered = powered;
-        
-        if (powered)
+        super(par1, Material.redstoneLight);
+        this.powered = par2;
+
+        if (par2)
         {
             this.setLightValue(1.0F);
         }
     }
 
+    @SideOnly(Side.CLIENT)
 
     /**
-     * Is this block (a) opaque and (b) a full 1m cube?  This determines whether or not to render the shared face of two
-     * adjacent blocks and also whether the player can attach torches, redstone wire, etc to this block.
+     * When this method is called, your block should register all the icons it needs with the given IconRegister. This
+     * is the only chance you get to register icons.
      */
-    public boolean isOpaqueCube()
+    public void registerIcons(IconRegister par1IconRegister)
     {
-        return true;
-    }
-
-    /**
-     * If this block doesn't render as an ordinary block it will return False (examples: signs, buttons, stairs, etc)
-     */
-    public boolean renderAsNormalBlock()
-    {
-        return true;
-    }
-
-    /**
-     * The type of render function that is called for this block
-     */
-    public int getRenderType()
-    {
-        return 0;
+        if (this.powered)
+        {
+            this.blockIcon = par1IconRegister.registerIcon("redstoneLight_lit");
+        }
+        else
+        {
+            this.blockIcon = par1IconRegister.registerIcon("redstoneLight");
+        }
     }
 
     /**
@@ -84,8 +76,6 @@ public class CarrierLamp extends Block
         return par1World.doesBlockHaveSolidTopSurface(par2, par3 - 1, par4) || par1World.getBlockId(par2, par3 - 1, par4) == Block.glowStone.blockID;
     }
 
-    
-    
     /**
      * Sets the strength of the wire current (0-15) for this block based on neighboring blocks and propagates to
      * neighboring redstone wires
@@ -210,30 +200,18 @@ public class CarrierLamp extends Block
             par1World.notifyBlocksOfNeighborChange(par2, par3 + 1, par4, this.blockID);
         }
     }
-
+    
     /**
      * Called whenever the block is added into the world. Args: world, x, y, z
      */
     public void onBlockAdded(World par1World, int par2, int par3, int par4)
     {
-        super.onBlockAdded(par1World, par2, par3, par4);
-
+    	super.onBlockAdded(par1World, par2, par3, par4);
+    	
         if (!par1World.isRemote)
+        {
         	
-        {
-            if (this.powered && !par1World.isBlockIndirectlyGettingPowered(par2, par3, par4))
-            {
-                par1World.scheduleBlockUpdate(par2, par3, par4, this.blockID, 0);
-            }
-            else if (!this.powered && par1World.isBlockIndirectlyGettingPowered(par2, par3, par4))
-            {
-                par1World.setBlock(par2, par3, par4, TimedOutput.CarrierLampOn.blockID, 0, 2);
-            }
-        }
-        
-        
-        {
-            this.updateAndPropagateCurrentStrength(par1World, par2, par3, par4);
+        	this.updateAndPropagateCurrentStrength(par1World, par2, par3, par4);
             par1World.notifyBlocksOfNeighborChange(par2, par3 + 1, par4, this.blockID);
             par1World.notifyBlocksOfNeighborChange(par2, par3 - 1, par4, this.blockID);
             this.notifyWireNeighborsOfNeighborChange(par1World, par2 - 1, par3, par4);
@@ -276,11 +254,30 @@ public class CarrierLamp extends Block
             {
                 this.notifyWireNeighborsOfNeighborChange(par1World, par2, par3 - 1, par4 + 1);
             }
+        	
+            if (this.powered && !par1World.isBlockIndirectlyGettingPowered(par2, par3, par4))
+            {
+                par1World.scheduleBlockUpdate(par2, par3, par4, this.blockID, 2);
+            }
+            else if (!this.powered && par1World.isBlockIndirectlyGettingPowered(par2, par3, par4))
+            {
+                par1World.setBlock(par2, par3, par4, TimedOutput.CarrierLampOn.blockID, 0, 2);
+            }
         }
+        if (par1World.getBlockId(par2, par3, par4) == this.blockID)
+        {
+            par1World.notifyBlocksOfNeighborChange(par2, par3, par4, this.blockID);
+            par1World.notifyBlocksOfNeighborChange(par2 - 1, par3, par4, this.blockID);
+            par1World.notifyBlocksOfNeighborChange(par2 + 1, par3, par4, this.blockID);
+            par1World.notifyBlocksOfNeighborChange(par2, par3, par4 - 1, this.blockID);
+            par1World.notifyBlocksOfNeighborChange(par2, par3, par4 + 1, this.blockID);
+            par1World.notifyBlocksOfNeighborChange(par2, par3 - 1, par4, this.blockID);
+            par1World.notifyBlocksOfNeighborChange(par2, par3 + 1, par4, this.blockID);
+        }
+        
+        
     }
 
-    
-    
     /**
      * ejects contained items into the world, and notifies neighbours of an update, as appropriate
      */
@@ -337,6 +334,8 @@ public class CarrierLamp extends Block
             {
                 this.notifyWireNeighborsOfNeighborChange(par1World, par2, par3 - 1, par4 + 1);
             }
+            
+            
         }
     }
 
@@ -364,18 +363,6 @@ public class CarrierLamp extends Block
     public void onNeighborBlockChange(World par1World, int par2, int par3, int par4, int par5)
     {
         if (!par1World.isRemote)
-        	
-        {
-            if (this.powered && !par1World.isBlockIndirectlyGettingPowered(par2, par3, par4))
-            {
-                par1World.scheduleBlockUpdate(par2, par3, par4, this.blockID, 0);
-            }
-            else if (!this.powered && par1World.isBlockIndirectlyGettingPowered(par2, par3, par4))
-            {
-                par1World.setBlock(par2, par3, par4, TimedOutput.CarrierLampOn.blockID, 0, 2);
-            }
-        }
-        	
         {
             boolean flag = this.canPlaceBlockAt(par1World, par2, par3, par4);
 
@@ -391,27 +378,20 @@ public class CarrierLamp extends Block
 
             super.onNeighborBlockChange(par1World, par2, par3, par4, par5);
         }
-    }
-
-    /**
-     * Ticks the block if it's been scheduled
-     */
-    public void updateTick(World par1World, int par2, int par3, int par4, Random par5Random)
-    {
-        if (!par1World.isRemote && this.powered && !par1World.isBlockIndirectlyGettingPowered(par2, par3, par4))
-        {
-            par1World.setBlock(par2, par3, par4, TimedOutput.CarrierLampOff.blockID, 0, 2);
+     {
+            if (this.powered && !par1World.isBlockIndirectlyGettingPowered(par2, par3, par4))
+            {
+                par1World.scheduleBlockUpdate(par2, par3, par4, this.blockID, 2);
+            }
+            else if (!this.powered && par1World.isBlockIndirectlyGettingPowered(par2, par3, par4))
+            {
+                par1World.setBlock(par2, par3, par4, TimedOutput.CarrierLampOn.blockID, 0, 2);
+            }
         }
-    }
-    
-    /**
-     * Returns the ID of the items to drop on destruction.
-     */
-    public int idDropped(int par1, Random par2Random, int par3)
-    {
-        return TimedOutput.CarrierLampOff.blockID;
-    }
+     }
 
+
+    
     /**
      * Returns true if the block is emitting direct/strong redstone power on the specified side. Args: World, X, Y, Z,
      * side. Note that the side is reversed - eg it is 1 (up) when checking the bottom of the block.
@@ -495,15 +475,10 @@ public class CarrierLamp extends Block
     {
         int i1 = par0IBlockAccess.getBlockId(par1, par2, par3);
 
-        if (i1 == TimedOutput.CarrierLampOff.blockID)
+        if (i1 == Block.redstoneWire.blockID)
         {
             return true;
         }
-        else if (i1 == TimedOutput.CarrierLampOn.blockID)
-        {
-            return true;
-        }
-        
         else if (i1 == 0)
         {
             return false;
@@ -518,6 +493,20 @@ public class CarrierLamp extends Block
             return par4 == (j1 & 3) || par4 == Direction.footInvisibleFaceRemap[j1 & 3];
         }
     }
+
+
+    /**
+     * Ticks the block if it's been scheduled
+     */
+    public void updateTick(World par1World, int par2, int par3, int par4, Random par5Random)
+    {
+        if (!par1World.isRemote && this.powered && !par1World.isBlockIndirectlyGettingPowered(par2, par3, par4))
+        {
+            par1World.setBlock(par2, par3, par4, TimedOutput.CarrierLampOff.blockID, 0, 2);
+        }
+    }
+    
+    
 
     @SideOnly(Side.CLIENT)
 
@@ -583,6 +572,14 @@ public class CarrierLamp extends Block
             }
         }
     }
+    
+    /**
+     * Returns the ID of the items to drop on destruction.
+     */
+    public int idDropped(int par1, Random par2Random, int par3)
+    {
+        return TimedOutput.CarrierLampOff.blockID;
+    }
 
     @SideOnly(Side.CLIENT)
 
@@ -592,22 +589,5 @@ public class CarrierLamp extends Block
     public int idPicked(World par1World, int par2, int par3, int par4)
     {
         return TimedOutput.CarrierLampOff.blockID;
-    }
-
-    @SideOnly(Side.CLIENT)
-    /**
-     * When this method is called, your block should register all the icons it needs with the given IconRegister. This
-     * is the only chance you get to register icons.
-     */
-    public void registerIcons(IconRegister par1IconRegister)
-    {
-        if (this.powered)
-        {
-            this.blockIcon = par1IconRegister.registerIcon("redstoneLight_lit");
-        }
-        else
-        {
-            this.blockIcon = par1IconRegister.registerIcon("redstoneLight");
-        }
     }
 }
