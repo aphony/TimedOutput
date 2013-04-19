@@ -565,7 +565,7 @@ public class CarrierLamp extends Block
         {
             int i1 = par0IBlockAccess.getBlockId(par1, par2, par3);
 
-            if (i1 == TimedOutput.CarrierLampOff.blockID)
+            if (i1 == TimedOutput.CarrierLampOn.blockID)
             {
                 int j1 = par0IBlockAccess.getBlockMetadata(par1, par2, par3);
                 return par4 == (j1 & 3);
