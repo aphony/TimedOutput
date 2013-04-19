@@ -5,6 +5,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 import mods.timedoutput.TimedButtonBase;
 import net.minecraft.block.Block;
 import net.minecraft.util.Icon;
+import net.minecraft.world.World;
 
 public class Button10Ticks extends TimedButtonBase
 {
@@ -13,6 +14,12 @@ public class Button10Ticks extends TimedButtonBase
         super(par1, true);
     }
 
+    @Override
+    public int tickRate(World par1World)
+    {
+        return (int) (this.sensible ? 10 : 0);
+    }
+    
     @SideOnly(Side.CLIENT)
 
     /**

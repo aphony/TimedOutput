@@ -17,14 +17,14 @@ public class to_naming {
         LanguageRegistry.instance().addName(new ItemStack(TimedOutput.Button60Ticks), "Three Second Signal Button");
         LanguageRegistry.instance().addName(new ItemStack(TimedOutput.Button80Ticks), "Four Second Signal Button");
         LanguageRegistry.instance().addName(new ItemStack(TimedOutput.Button100Ticks), "Five Second Signal Button");
-        LanguageRegistry.instance().addName(new ItemStack(TimedOutput.Button200Ticks), "Ten Second Signal Button");
-        LanguageRegistry.instance().addName(new ItemStack(TimedOutput.Button300Ticks), "Fifteen Second Signal Button");
-        LanguageRegistry.instance().addName(new ItemStack(TimedOutput.Button400Ticks), "Twenty Second Signal Button");
-        LanguageRegistry.instance().addName(new ItemStack(TimedOutput.Button500Ticks), "Twenty-Five Second Signal Button");
-        LanguageRegistry.instance().addName(new ItemStack(TimedOutput.Button600Ticks), "Thirty Second Signal Button");
-        LanguageRegistry.instance().addName(new ItemStack(TimedOutput.Button1200Ticks), "One Minute Signal Button");
-        LanguageRegistry.instance().addName(new ItemStack(TimedOutput.Button6000Ticks), "Five Minute Signal Button");
-        LanguageRegistry.instance().addName(new ItemStack(TimedOutput.Button36000Ticks), "Thirty Minute Signal Button");
+        LanguageRegistry.instance().addName(new ItemStack(TimedOutput.PressurePlate5Ticks), "1/4 Second Signal PressurePlate");
+        LanguageRegistry.instance().addName(new ItemStack(TimedOutput.PressurePlate10Ticks), "1/2 Second Signal PressurePlate");
+        LanguageRegistry.instance().addName(new ItemStack(TimedOutput.PressurePlate15Ticks), "3/4 Second Signal PressurePlate");
+        LanguageRegistry.instance().addName(new ItemStack(TimedOutput.PressurePlate20Ticks), "One Second Signal PressurePlate");
+        LanguageRegistry.instance().addName(new ItemStack(TimedOutput.PressurePlate40Ticks), "Two Second Signal PressurePlate");
+        LanguageRegistry.instance().addName(new ItemStack(TimedOutput.PressurePlate60Ticks), "Three Second Signal PressurePlate");
+        LanguageRegistry.instance().addName(new ItemStack(TimedOutput.PressurePlate80Ticks), "Four Second Signal PressurePlate");
+        LanguageRegistry.instance().addName(new ItemStack(TimedOutput.PressurePlate100Ticks), "Five Second Signal PressurePlate");
 
     }
 		

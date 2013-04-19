@@ -1,19 +1,25 @@
 package mods.timedoutput.blocks;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import mods.timedoutput.TimedButtonBase3;
+import mods.timedoutput.TimedButtonBase;
 import net.minecraft.block.Block;
 import net.minecraft.util.Icon;
 import net.minecraft.world.World;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
-public class Button60Ticks extends TimedButtonBase3
+public class Button60Ticks extends TimedButtonBase
 {
     public Button60Ticks(int par1)
     {
         super(par1, true);
     }
 
+    @Override
+    public int tickRate(World par1World)
+    {
+        return (int) (this.sensible ? 60 : 0);
+    }
+    
     @SideOnly(Side.CLIENT)
 
     /**

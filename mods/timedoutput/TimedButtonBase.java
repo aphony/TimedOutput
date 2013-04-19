@@ -46,7 +46,7 @@ public abstract class TimedButtonBase extends Block
      */
     public int tickRate(World par1World)
     {
-        return this.sensible ? 5 :  10 ;
+        return (int) (this.sensible ? 5 : 0);
     }
 
     /**

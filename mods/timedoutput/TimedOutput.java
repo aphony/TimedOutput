@@ -12,13 +12,17 @@ import cpw.mods.fml.common.Mod.Init;
 import cpw.mods.fml.common.Mod.Instance;
 import cpw.mods.fml.common.Mod.PostInit;
 import cpw.mods.fml.common.Mod.PreInit;
+import cpw.mods.fml.common.Mod.ServerStarting;
 import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
+import cpw.mods.fml.common.event.FMLServerStartingEvent;
 import cpw.mods.fml.common.network.NetworkMod;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
+import cpw.mods.fml.common.registry.TickRegistry;
+import cpw.mods.fml.relauncher.Side;
 
 @Mod(modid = "TimedOutput", name = "TimedOutput", version = "0.1.5 Alpha", useMetadata = false)
 @NetworkMod(channels = "TimedOutput", packetHandler = to_packetHandler.class,clientSideRequired = true, serverSideRequired = false)
@@ -43,14 +47,15 @@ public class TimedOutput
 	public static Block Button60Ticks;
 	public static Block Button80Ticks;
 	public static Block Button100Ticks;
-	public static Block Button200Ticks;
-	public static Block Button300Ticks;
-	public static Block Button400Ticks;
-	public static Block Button500Ticks;
-	public static Block Button600Ticks;
-	public static Block Button1200Ticks;
-	public static Block Button6000Ticks;
-	public static Block Button36000Ticks;
+	public static Block PressurePlate5Ticks;
+	public static Block PressurePlate10Ticks;
+	public static Block PressurePlate15Ticks;
+	public static Block PressurePlate20Ticks;
+	public static Block PressurePlate40Ticks;
+	public static Block PressurePlate60Ticks;
+	public static Block PressurePlate80Ticks;
+	public static Block PressurePlate100Ticks;
+	
 	
 	@PreInit()
 	
@@ -79,7 +84,6 @@ public class TimedOutput
 
 	{
 
-
 		FMLLog.info("[TimedOutput] Adding Blocks");
 		
 		Button5Ticks = new mods.timedoutput.blocks.Button5Ticks(to_config.Button5TicksID).setHardness(1.0f).setResistance(50.0f).setCreativeTab(TimedOutputTab).setUnlocalizedName("Button5Ticks");
@@ -89,15 +93,15 @@ public class TimedOutput
 		Button40Ticks = new mods.timedoutput.blocks.Button40Ticks(to_config.Button40TicksID).setHardness(1.0f).setResistance(50.0f).setCreativeTab(TimedOutputTab).setUnlocalizedName("Button40Ticks");
 		Button60Ticks = new mods.timedoutput.blocks.Button60Ticks(to_config.Button60TicksID).setHardness(1.0f).setResistance(50.0f).setCreativeTab(TimedOutputTab).setUnlocalizedName("Button60Ticks");
 		Button80Ticks = new mods.timedoutput.blocks.Button80Ticks(to_config.Button80TicksID).setHardness(1.0f).setResistance(50.0f).setCreativeTab(TimedOutputTab).setUnlocalizedName("Button80Ticks");
-		Button100Ticks = new mods.timedoutput.blocks.Button100Ticks(to_config.Button100TicksID).setHardness(1.0f).setResistance(50.0f).setCreativeTab(TimedOutputTab).setUnlocalizedName("Button100Ticks");
-		Button200Ticks = new mods.timedoutput.blocks.Button200Ticks(to_config.Button200TicksID).setHardness(1.0f).setResistance(50.0f).setCreativeTab(TimedOutputTab).setUnlocalizedName("Button200Ticks");
-		Button300Ticks = new mods.timedoutput.blocks.Button300Ticks(to_config.Button300TicksID).setHardness(1.0f).setResistance(50.0f).setCreativeTab(TimedOutputTab).setUnlocalizedName("Button300Ticks");
-		Button400Ticks = new mods.timedoutput.blocks.Button400Ticks(to_config.Button400TicksID).setHardness(1.0f).setResistance(50.0f).setCreativeTab(TimedOutputTab).setUnlocalizedName("Button400Ticks");
-		Button500Ticks = new mods.timedoutput.blocks.Button500Ticks(to_config.Button500TicksID).setHardness(1.0f).setResistance(50.0f).setCreativeTab(TimedOutputTab).setUnlocalizedName("Button500Ticks");
-		Button600Ticks = new mods.timedoutput.blocks.Button600Ticks(to_config.Button600TicksID).setHardness(1.0f).setResistance(50.0f).setCreativeTab(TimedOutputTab).setUnlocalizedName("Button600Ticks");
-		Button1200Ticks = new mods.timedoutput.blocks.Button1200Ticks(to_config.Button1200TicksID).setHardness(1.0f).setResistance(50.0f).setCreativeTab(TimedOutputTab).setUnlocalizedName("Button1200Ticks");
-		Button6000Ticks = new mods.timedoutput.blocks.Button6000Ticks(to_config.Button6000TicksID).setHardness(1.0f).setResistance(50.0f).setCreativeTab(TimedOutputTab).setUnlocalizedName("Button6000Ticks");
-		Button36000Ticks = new mods.timedoutput.blocks.Button36000Ticks(to_config.Button36000TicksID).setHardness(1.0f).setResistance(50.0f).setCreativeTab(TimedOutputTab).setUnlocalizedName("Button36000Ticks");
+		Button100Ticks = new mods.timedoutput.blocks.Button100Ticks(to_config.Button100TicksID).setHardness(1.0f).setResistance(50.0f).setCreativeTab(TimedOutputTab).setUnlocalizedName("Button100Ticks");		
+		PressurePlate5Ticks = new mods.timedoutput.blocks.PressurePlate5Ticks(to_config.PressurePlate5TicksID, null, null, null).setHardness(1.0f).setResistance(50.0f).setCreativeTab(TimedOutputTab).setUnlocalizedName("PressurePlate5Ticks");
+		PressurePlate10Ticks = new mods.timedoutput.blocks.PressurePlate10Ticks(to_config.PressurePlate10TicksID, null, null, null).setHardness(1.0f).setResistance(50.0f).setCreativeTab(TimedOutputTab).setUnlocalizedName("PressurePlate10Ticks");
+		PressurePlate15Ticks = new mods.timedoutput.blocks.PressurePlate15Ticks(to_config.PressurePlate15TicksID, null, null, null).setHardness(1.0f).setResistance(50.0f).setCreativeTab(TimedOutputTab).setUnlocalizedName("PressurePlate15Ticks");
+		PressurePlate20Ticks = new mods.timedoutput.blocks.PressurePlate20Ticks(to_config.PressurePlate20TicksID, null, null, null).setHardness(1.0f).setResistance(50.0f).setCreativeTab(TimedOutputTab).setUnlocalizedName("PressurePlate20Ticks");
+		PressurePlate40Ticks = new mods.timedoutput.blocks.PressurePlate40Ticks(to_config.PressurePlate40TicksID, null, null, null).setHardness(1.0f).setResistance(50.0f).setCreativeTab(TimedOutputTab).setUnlocalizedName("PressurePlate40Ticks");
+		PressurePlate60Ticks = new mods.timedoutput.blocks.PressurePlate60Ticks(to_config.PressurePlate60TicksID, null, null, null).setHardness(1.0f).setResistance(50.0f).setCreativeTab(TimedOutputTab).setUnlocalizedName("PressurePlate60Ticks");
+		PressurePlate80Ticks = new mods.timedoutput.blocks.PressurePlate80Ticks(to_config.PressurePlate80TicksID, null, null, null).setHardness(1.0f).setResistance(50.0f).setCreativeTab(TimedOutputTab).setUnlocalizedName("PressurePlate80Ticks");
+		PressurePlate100Ticks = new mods.timedoutput.blocks.PressurePlate100Ticks(to_config.PressurePlate100TicksID, null, null, null).setHardness(1.0f).setResistance(50.0f).setCreativeTab(TimedOutputTab).setUnlocalizedName("PressurePlate100Ticks");
 
 		Item.itemsList[to_config.Button5TicksID] = new mods.timedoutput.blocks.Button5TicksItem(to_config.Button5TicksID-256).setUnlocalizedName("Button5Ticks");
 		Item.itemsList[to_config.Button10TicksID] = new mods.timedoutput.blocks.Button10TicksItem(to_config.Button10TicksID-256).setUnlocalizedName("Button10Ticks");
@@ -107,24 +111,20 @@ public class TimedOutput
 		Item.itemsList[to_config.Button60TicksID] = new mods.timedoutput.blocks.Button60TicksItem(to_config.Button60TicksID-256).setUnlocalizedName("Button60Ticks");
 		Item.itemsList[to_config.Button80TicksID] = new mods.timedoutput.blocks.Button80TicksItem(to_config.Button80TicksID-256).setUnlocalizedName("Button80Ticks");
 		Item.itemsList[to_config.Button100TicksID] = new mods.timedoutput.blocks.Button100TicksItem(to_config.Button100TicksID-256).setUnlocalizedName("Button100Ticks");
-		Item.itemsList[to_config.Button200TicksID] = new mods.timedoutput.blocks.Button200TicksItem(to_config.Button200TicksID-256).setUnlocalizedName("Button200Ticks");
-		Item.itemsList[to_config.Button300TicksID] = new mods.timedoutput.blocks.Button300TicksItem(to_config.Button300TicksID-256).setUnlocalizedName("Button300Ticks");
-		Item.itemsList[to_config.Button400TicksID] = new mods.timedoutput.blocks.Button400TicksItem(to_config.Button400TicksID-256).setUnlocalizedName("Button400Ticks");
-		Item.itemsList[to_config.Button500TicksID] = new mods.timedoutput.blocks.Button500TicksItem(to_config.Button500TicksID-256).setUnlocalizedName("Button500Ticks");
-		Item.itemsList[to_config.Button600TicksID] = new mods.timedoutput.blocks.Button600TicksItem(to_config.Button600TicksID-256).setUnlocalizedName("Button600Ticks");
-		Item.itemsList[to_config.Button1200TicksID] = new mods.timedoutput.blocks.Button1200TicksItem(to_config.Button1200TicksID-256).setUnlocalizedName("Button1200Ticks");
-		Item.itemsList[to_config.Button6000TicksID] = new mods.timedoutput.blocks.Button6000TicksItem(to_config.Button6000TicksID-256).setUnlocalizedName("Button6000Ticks");
-		Item.itemsList[to_config.Button36000TicksID] = new mods.timedoutput.blocks.Button36000TicksItem(to_config.Button36000TicksID-256).setUnlocalizedName("Button36000Ticks");
-		
+		Item.itemsList[to_config.PressurePlate5TicksID] = new mods.timedoutput.blocks.PressurePlate5TicksItem(to_config.PressurePlate5TicksID-256).setUnlocalizedName("PressurePlate5Ticks");
+		Item.itemsList[to_config.PressurePlate10TicksID] = new mods.timedoutput.blocks.PressurePlate10TicksItem(to_config.PressurePlate10TicksID-256).setUnlocalizedName("PressurePlate10Ticks");
+		Item.itemsList[to_config.PressurePlate15TicksID] = new mods.timedoutput.blocks.PressurePlate15TicksItem(to_config.PressurePlate15TicksID-256).setUnlocalizedName("PressurePlate15Ticks");
+		Item.itemsList[to_config.PressurePlate20TicksID] = new mods.timedoutput.blocks.PressurePlate20TicksItem(to_config.PressurePlate20TicksID-256).setUnlocalizedName("PressurePlate20Ticks");
+		Item.itemsList[to_config.PressurePlate40TicksID] = new mods.timedoutput.blocks.PressurePlate40TicksItem(to_config.PressurePlate40TicksID-256).setUnlocalizedName("PressurePlate40Ticks");
+		Item.itemsList[to_config.PressurePlate60TicksID] = new mods.timedoutput.blocks.PressurePlate60TicksItem(to_config.PressurePlate60TicksID-256).setUnlocalizedName("PressurePlate60Ticks");
+		Item.itemsList[to_config.PressurePlate80TicksID] = new mods.timedoutput.blocks.PressurePlate80TicksItem(to_config.PressurePlate80TicksID-256).setUnlocalizedName("PressurePlate80Ticks");
+		Item.itemsList[to_config.PressurePlate100TicksID] = new mods.timedoutput.blocks.PressurePlate100TicksItem(to_config.PressurePlate100TicksID-256).setUnlocalizedName("PressurePlate100Ticks");
 	
 	}
-
-
-    
-    
 
 	@PostInit
 	public void postInit(FMLPostInitializationEvent event) {
 	
 	}
+	
 }

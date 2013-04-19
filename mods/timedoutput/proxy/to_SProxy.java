@@ -50,9 +50,4 @@ implements IGuiHandler{
 		return TimedOutput.MOD + ":" + TextureName;
 		}
 
-		public void registerServerTickHandler(){
-			TickRegistry.registerTickHandler(new ServerTickHandler(), Side.SERVER);
-		}
-
-
 }
