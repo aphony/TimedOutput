@@ -24,6 +24,8 @@ public static void init() {
 		public static int Button100TicksID = 1357;
 		public static int ZeroDelayLampOffID = 1360;
 		public static int ZeroDelayLampOnID = 1361;
+		public static int DelayedLamp_10SecOffID = 1362;
+		public static int DelayedLamp_10SecOnID = 1363;
 		
 	
 
@@ -41,6 +43,8 @@ public static void init() {
 		    Button100TicksID = config.get("Timed Buttons", "Five Second Button", 1357).getInt();
 		    ZeroDelayLampOffID = config.get("Lamps", "Zero Delay Lamp Off", 1360).getInt();
 		    ZeroDelayLampOnID = config.get("Lamps", "Zero Delay Lamp On", 1361).getInt();
+		    DelayedLamp_10SecOffID = config.get("Lamps", "10 Second Off Delay Lamp", 1362).getInt();
+		    DelayedLamp_10SecOnID = config.get("Lamps", "10 Second On Delay Lamp", 1363).getInt();
 
 		    
 		    config.save();

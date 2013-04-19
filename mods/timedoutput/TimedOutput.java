@@ -1,5 +1,6 @@
 package mods.timedoutput;
 
+import mods.timedoutput.blocks.DelayedLamp_10Sec;
 import mods.timedoutput.blocks.ZeroDelayLamp;
 import mods.timedoutput.proxy.to_SProxy;
 import net.minecraft.block.Block;
@@ -51,6 +52,8 @@ public class TimedOutput
 	public static Block Button100Ticks;
 	public static Block ZeroDelayLampOff;
 	public static Block ZeroDelayLampOn;
+	public static Block DelayedLamp_10SecOff;
+	public static Block DelayedLamp_10SecOn;
 	
 	
 	@PreInit()
@@ -92,6 +95,8 @@ public class TimedOutput
 		Button100Ticks = new mods.timedoutput.blocks.Button100Ticks(to_config.Button100TicksID).setHardness(1.0f).setResistance(50.0f).setCreativeTab(TimedOutputTab).setUnlocalizedName("Button100Ticks");
 	    ZeroDelayLampOff = new ZeroDelayLamp(to_config.ZeroDelayLampOffID, false).setHardness(0.3F).setResistance(1.0f).setCreativeTab(TimedOutput.TimedOutputTab).setUnlocalizedName("ZeroDelayLampOff");
 	    ZeroDelayLampOn = new ZeroDelayLamp(to_config.ZeroDelayLampOnID, true).setHardness(0.3F).setResistance(1.0f).setCreativeTab(TimedOutput.TimedOutputTab).setUnlocalizedName("ZeroDelayLampOn");
+	    DelayedLamp_10SecOff = new DelayedLamp_10Sec(to_config.DelayedLamp_10SecOffID, false).setHardness(0.3F).setResistance(1.0f).setCreativeTab(TimedOutput.TimedOutputTab).setUnlocalizedName("DelayedLamp_10SecOff");
+	    DelayedLamp_10SecOn = new DelayedLamp_10Sec(to_config.DelayedLamp_10SecOnID, true).setHardness(0.3F).setResistance(1.0f).setCreativeTab(TimedOutput.TimedOutputTab).setUnlocalizedName("DelayedLamp_10SecOn");
 	
 		Item.itemsList[to_config.Button5TicksID] = new mods.timedoutput.blocks.Button5TicksItem(to_config.Button5TicksID-256).setUnlocalizedName("Button5Ticks");
 		Item.itemsList[to_config.Button10TicksID] = new mods.timedoutput.blocks.Button10TicksItem(to_config.Button10TicksID-256).setUnlocalizedName("Button10Ticks");
@@ -101,8 +106,10 @@ public class TimedOutput
 		Item.itemsList[to_config.Button60TicksID] = new mods.timedoutput.blocks.Button60TicksItem(to_config.Button60TicksID-256).setUnlocalizedName("Button60Ticks");
 		Item.itemsList[to_config.Button80TicksID] = new mods.timedoutput.blocks.Button80TicksItem(to_config.Button80TicksID-256).setUnlocalizedName("Button80Ticks");
 		Item.itemsList[to_config.Button100TicksID] = new mods.timedoutput.blocks.Button100TicksItem(to_config.Button100TicksID-256).setUnlocalizedName("Button100Ticks");
-		Item.itemsList[to_config.ZeroDelayLampOffID] = new mods.timedoutput.blocks.Button80TicksItem(to_config.ZeroDelayLampOffID-256).setUnlocalizedName("ZeroDelayLampOff");
-		Item.itemsList[to_config.ZeroDelayLampOnID] = new mods.timedoutput.blocks.Button100TicksItem(to_config.ZeroDelayLampOnID-256).setUnlocalizedName("ZeroDelayLampOn");
+		Item.itemsList[to_config.ZeroDelayLampOffID] = new mods.timedoutput.blocks.ZeroDelayLampItem(to_config.ZeroDelayLampOffID-256).setUnlocalizedName("ZeroDelayLampOff");
+		Item.itemsList[to_config.ZeroDelayLampOnID] = new mods.timedoutput.blocks.ZeroDelayLampItem(to_config.ZeroDelayLampOnID-256).setUnlocalizedName("ZeroDelayLampOn");
+		Item.itemsList[to_config.DelayedLamp_10SecOffID] = new mods.timedoutput.blocks.DelayedLamp_10SecItem(to_config.DelayedLamp_10SecOffID-256).setUnlocalizedName("DelayedLamp_10SecOff");
+		Item.itemsList[to_config.DelayedLamp_10SecOnID] = new mods.timedoutput.blocks.DelayedLamp_10SecItem(to_config.DelayedLamp_10SecOnID-256).setUnlocalizedName("DelayedLamp_10SecOn");
 	
 	}
 

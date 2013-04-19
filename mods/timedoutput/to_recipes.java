@@ -18,6 +18,7 @@ public class to_recipes {
 		GameRegistry.addShapelessRecipe(new ItemStack(TimedOutput.Button100Ticks), new ItemStack(TimedOutput.Button80Ticks));
 		GameRegistry.addShapelessRecipe(new ItemStack(Block.woodenButton), new ItemStack(TimedOutput.Button100Ticks));
 		GameRegistry.addShapelessRecipe(new ItemStack(TimedOutput.ZeroDelayLampOff), new ItemStack(Block.redstoneLampActive));
+		GameRegistry.addShapelessRecipe(new ItemStack(TimedOutput.DelayedLamp_10SecOff), new ItemStack(TimedOutput.ZeroDelayLampOff));
 		
 	}
 
