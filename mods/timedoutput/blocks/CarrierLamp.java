@@ -69,6 +69,14 @@ public class CarrierLamp extends Block
     }
 
     /**
+     * Checks to see if its valid to put this block at the specified coordinates. Args: world, x, y, z
+     */
+    public boolean canPlaceBlockAt(World par1World, int par2, int par3, int par4)
+    {
+        return par1World.doesBlockHaveSolidTopSurface(par2, par3 - 1, par4) || par1World.getBlockId(par2, par3 - 1, par4) == Block.glowStone.blockID;
+    }
+
+    /**
      * Sets the strength of the wire current (0-15) for this block based on neighboring blocks and propagates to
      * neighboring redstone wires
      */
@@ -210,6 +218,8 @@ public class CarrierLamp extends Block
             this.notifyWireNeighborsOfNeighborChange(par1World, par2 + 1, par3, par4);
             this.notifyWireNeighborsOfNeighborChange(par1World, par2, par3, par4 - 1);
             this.notifyWireNeighborsOfNeighborChange(par1World, par2, par3, par4 + 1);
+            this.notifyWireNeighborsOfNeighborChange(par1World, par2, par3 - 1, par4);
+            this.notifyWireNeighborsOfNeighborChange(par1World, par2, par3 + 1, par4);
 
             if (par1World.isBlockNormalCube(par2 - 1, par3, par4))
             {
@@ -249,7 +259,7 @@ public class CarrierLamp extends Block
         	
             if (this.powered && !par1World.isBlockIndirectlyGettingPowered(par2, par3, par4))
             {
-                par1World.scheduleBlockUpdate(par2, par3, par4, this.blockID, 0);
+                par1World.scheduleBlockUpdate(par2, par3, par4, this.blockID, 2);
             }
             else if (!this.powered && par1World.isBlockIndirectlyGettingPowered(par2, par3, par4))
             {
@@ -375,7 +385,7 @@ public class CarrierLamp extends Block
      {
             if (this.powered && !par1World.isBlockIndirectlyGettingPowered(par2, par3, par4))
             {
-                par1World.scheduleBlockUpdate(par2, par3, par4, this.blockID, 0);
+                par1World.scheduleBlockUpdate(par2, par3, par4, this.blockID, 2);
             }
             else if (!this.powered && par1World.isBlockIndirectlyGettingPowered(par2, par3, par4))
             {
@@ -469,7 +479,7 @@ public class CarrierLamp extends Block
     {
         int i1 = par0IBlockAccess.getBlockId(par1, par2, par3);
 
-        if (i1 == Block.redstoneWire.blockID)
+        if (i1 == TimedOutput.CarrierLampOff.blockID)
         {
             return true;
         }
