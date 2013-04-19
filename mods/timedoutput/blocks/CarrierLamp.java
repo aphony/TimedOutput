@@ -69,322 +69,13 @@ public class CarrierLamp extends Block
     }
 
     /**
-     * Called whenever the block is added into the world. Args: world, x, y, z
+     * Checks to see if its valid to put this block at the specified coordinates. Args: world, x, y, z
      */
-    public void onBlockAdded(World par1World, int par2, int par3, int par4)
+    public boolean canPlaceBlockAt(World par1World, int par2, int par3, int par4)
     {
-        if (!par1World.isRemote)
-        {
-            if (this.powered && !par1World.isBlockIndirectlyGettingPowered(par2, par3, par4))
-            {
-                par1World.scheduleBlockUpdate(par2, par3, par4, this.blockID, 100);
-            }
-            else if (!this.powered && par1World.isBlockIndirectlyGettingPowered(par2, par3, par4))
-            {
-                par1World.setBlock(par2, par3, par4, TimedOutput.CarrierLampOn.blockID, 0, 2);
-            }
-        }
-        if (par1World.getBlockId(par2, par3, par4) == this.blockID)
-        {
-            par1World.notifyBlocksOfNeighborChange(par2, par3, par4, this.blockID);
-            par1World.notifyBlocksOfNeighborChange(par2 - 1, par3, par4, this.blockID);
-            par1World.notifyBlocksOfNeighborChange(par2 + 1, par3, par4, this.blockID);
-            par1World.notifyBlocksOfNeighborChange(par2, par3, par4 - 1, this.blockID);
-            par1World.notifyBlocksOfNeighborChange(par2, par3, par4 + 1, this.blockID);
-            par1World.notifyBlocksOfNeighborChange(par2, par3 - 1, par4, this.blockID);
-            par1World.notifyBlocksOfNeighborChange(par2, par3 + 1, par4, this.blockID);
-        }
-    }
-    
-
-    /**
-     * Called whenever the block is added into the world. Args: world, x, y, z
-     */
-    public void onBlockAdded1(World par1World, int par2, int par3, int par4)
-    {
-        super.onBlockAdded(par1World, par2, par3, par4);
-
-        if (!par1World.isRemote)
-        {
-            this.updateAndPropagateCurrentStrength(par1World, par2, par3, par4);
-            par1World.notifyBlocksOfNeighborChange(par2, par3 + 1, par4, this.blockID);
-            par1World.notifyBlocksOfNeighborChange(par2, par3 - 1, par4, this.blockID);
-            this.notifyWireNeighborsOfNeighborChange(par1World, par2 - 1, par3, par4);
-            this.notifyWireNeighborsOfNeighborChange(par1World, par2 + 1, par3, par4);
-            this.notifyWireNeighborsOfNeighborChange(par1World, par2, par3, par4 - 1);
-            this.notifyWireNeighborsOfNeighborChange(par1World, par2, par3, par4 + 1);
-
-            if (par1World.isBlockNormalCube(par2 - 1, par3, par4))
-            {
-                this.notifyWireNeighborsOfNeighborChange(par1World, par2 - 1, par3 + 1, par4);
-            }
-            else
-            {
-                this.notifyWireNeighborsOfNeighborChange(par1World, par2 - 1, par3 - 1, par4);
-            }
-
-            if (par1World.isBlockNormalCube(par2 + 1, par3, par4))
-            {
-                this.notifyWireNeighborsOfNeighborChange(par1World, par2 + 1, par3 + 1, par4);
-            }
-            else
-            {
-                this.notifyWireNeighborsOfNeighborChange(par1World, par2 + 1, par3 - 1, par4);
-            }
-
-            if (par1World.isBlockNormalCube(par2, par3, par4 - 1))
-            {
-                this.notifyWireNeighborsOfNeighborChange(par1World, par2, par3 + 1, par4 - 1);
-            }
-            else
-            {
-                this.notifyWireNeighborsOfNeighborChange(par1World, par2, par3 - 1, par4 - 1);
-            }
-
-            if (par1World.isBlockNormalCube(par2, par3, par4 + 1))
-            {
-                this.notifyWireNeighborsOfNeighborChange(par1World, par2, par3 + 1, par4 + 1);
-            }
-            else
-            {
-                this.notifyWireNeighborsOfNeighborChange(par1World, par2, par3 - 1, par4 + 1);
-            }
-        }
+        return par1World.doesBlockHaveSolidTopSurface(par2, par3 - 1, par4) || par1World.getBlockId(par2, par3 - 1, par4) == Block.glowStone.blockID;
     }
 
-    /**
-     * ejects contained items into the world, and notifies neighbours of an update, as appropriate
-     */
-    public void breakBlock(World par1World, int par2, int par3, int par4, int par5, int par6)
-    {
-        super.breakBlock(par1World, par2, par3, par4, par5, par6);
-
-        if (!par1World.isRemote)
-        {
-            par1World.notifyBlocksOfNeighborChange(par2, par3 + 1, par4, this.blockID);
-            par1World.notifyBlocksOfNeighborChange(par2, par3 - 1, par4, this.blockID);
-            par1World.notifyBlocksOfNeighborChange(par2 + 1, par3, par4, this.blockID);
-            par1World.notifyBlocksOfNeighborChange(par2 - 1, par3, par4, this.blockID);
-            par1World.notifyBlocksOfNeighborChange(par2, par3, par4 + 1, this.blockID);
-            par1World.notifyBlocksOfNeighborChange(par2, par3, par4 - 1, this.blockID);
-            this.updateAndPropagateCurrentStrength(par1World, par2, par3, par4);
-            this.notifyWireNeighborsOfNeighborChange(par1World, par2 - 1, par3, par4);
-            this.notifyWireNeighborsOfNeighborChange(par1World, par2 + 1, par3, par4);
-            this.notifyWireNeighborsOfNeighborChange(par1World, par2, par3, par4 - 1);
-            this.notifyWireNeighborsOfNeighborChange(par1World, par2, par3, par4 + 1);
-
-            if (par1World.isBlockNormalCube(par2 - 1, par3, par4))
-            {
-                this.notifyWireNeighborsOfNeighborChange(par1World, par2 - 1, par3 + 1, par4);
-            }
-            else
-            {
-                this.notifyWireNeighborsOfNeighborChange(par1World, par2 - 1, par3 - 1, par4);
-            }
-
-            if (par1World.isBlockNormalCube(par2 + 1, par3, par4))
-            {
-                this.notifyWireNeighborsOfNeighborChange(par1World, par2 + 1, par3 + 1, par4);
-            }
-            else
-            {
-                this.notifyWireNeighborsOfNeighborChange(par1World, par2 + 1, par3 - 1, par4);
-            }
-
-            if (par1World.isBlockNormalCube(par2, par3, par4 - 1))
-            {
-                this.notifyWireNeighborsOfNeighborChange(par1World, par2, par3 + 1, par4 - 1);
-            }
-            else
-            {
-                this.notifyWireNeighborsOfNeighborChange(par1World, par2, par3 - 1, par4 - 1);
-            }
-
-            if (par1World.isBlockNormalCube(par2, par3, par4 + 1))
-            {
-                this.notifyWireNeighborsOfNeighborChange(par1World, par2, par3 + 1, par4 + 1);
-            }
-            else
-            {
-                this.notifyWireNeighborsOfNeighborChange(par1World, par2, par3 - 1, par4 + 1);
-            }
-        }
-    }
-
-    /**
-     * Returns the current strength at the specified block if it is greater than the passed value, or the passed value
-     * otherwise. Signature: (world, x, y, z, strength)
-     */
-    private int getMaxCurrentStrength(World par1World, int par2, int par3, int par4, int par5)
-    {
-        if (par1World.getBlockId(par2, par3, par4) != this.blockID)
-        {
-            return par5;
-        }
-        else
-        {
-            int i1 = par1World.getBlockMetadata(par2, par3, par4);
-            return i1 > par5 ? i1 : par5;
-        }
-    }
-
-    /**
-     * Lets the block know when one of its neighbor changes. Doesn't know which neighbor changed (coordinates passed are
-     * their own) Args: x, y, z, neighbor blockID
-     */
-    public void onNeighborBlockChange1(World par1World, int par2, int par3, int par4, int par5)
-    {
-        if (!par1World.isRemote)
-        {
-            boolean flag = this.canPlaceBlockAt(par1World, par2, par3, par4);
-
-            if (flag)
-            {
-                this.updateAndPropagateCurrentStrength(par1World, par2, par3, par4);
-            }
-            else
-            {
-                this.dropBlockAsItem(par1World, par2, par3, par4, 0, 100);
-                par1World.setBlockToAir(par2, par3, par4);
-            }
-
-            super.onNeighborBlockChange(par1World, par2, par3, par4, par5);
-        }
-    }
-
-    /**
-     * Lets the block know when one of its neighbor changes. Doesn't know which neighbor changed (coordinates passed are
-     * their own) Args: x, y, z, neighbor blockID
-     */
-    public void onNeighborBlockChange2(World par1World, int par2, int par3, int par4, int par5)
-    {
-        if (!par1World.isRemote)
-        {
-            if (this.powered && !par1World.isBlockIndirectlyGettingPowered(par2, par3, par4))
-            {
-                par1World.scheduleBlockUpdate(par2, par3, par4, this.blockID, 100);
-            }
-            else if (!this.powered && par1World.isBlockIndirectlyGettingPowered(par2, par3, par4))
-            {
-                par1World.setBlock(par2, par3, par4, TimedOutput.CarrierLampOn.blockID, 0, 2);
-            }
-        }
-    }
-    
-    /**
-     * Returns true if the block is emitting direct/strong redstone power on the specified side. Args: World, X, Y, Z,
-     * side. Note that the side is reversed - eg it is 1 (up) when checking the bottom of the block.
-     */
-    public int isProvidingStrongPower(IBlockAccess par1IBlockAccess, int par2, int par3, int par4, int par5)
-    {
-        return !this.wiresProvidePower ? 0 : this.isProvidingWeakPower(par1IBlockAccess, par2, par3, par4, par5);
-    }
-
-    /**
-     * Returns true if the block is emitting indirect/weak redstone power on the specified side. If isBlockNormalCube
-     * returns true, standard redstone propagation rules will apply instead and this will not be called. Args: World, X,
-     * Y, Z, side. Note that the side is reversed - eg it is 1 (up) when checking the bottom of the block.
-     */
-    public int isProvidingWeakPower(IBlockAccess par1IBlockAccess, int par2, int par3, int par4, int par5)
-    {
-        if (!this.wiresProvidePower)
-        {
-            return 0;
-        }
-        else
-        {
-            int i1 = par1IBlockAccess.getBlockMetadata(par2, par3, par4);
-
-            if (i1 == 0)
-            {
-                return 0;
-            }
-            else if (par5 == 1)
-            {
-                return i1;
-            }
-            else
-            {
-                boolean flag = isPoweredOrRepeater(par1IBlockAccess, par2 - 1, par3, par4, 1) || !par1IBlockAccess.isBlockNormalCube(par2 - 1, par3, par4) && isPoweredOrRepeater(par1IBlockAccess, par2 - 1, par3 - 1, par4, -1);
-                boolean flag1 = isPoweredOrRepeater(par1IBlockAccess, par2 + 1, par3, par4, 3) || !par1IBlockAccess.isBlockNormalCube(par2 + 1, par3, par4) && isPoweredOrRepeater(par1IBlockAccess, par2 + 1, par3 - 1, par4, -1);
-                boolean flag2 = isPoweredOrRepeater(par1IBlockAccess, par2, par3, par4 - 1, 2) || !par1IBlockAccess.isBlockNormalCube(par2, par3, par4 - 1) && isPoweredOrRepeater(par1IBlockAccess, par2, par3 - 1, par4 - 1, -1);
-                boolean flag3 = isPoweredOrRepeater(par1IBlockAccess, par2, par3, par4 + 1, 0) || !par1IBlockAccess.isBlockNormalCube(par2, par3, par4 + 1) && isPoweredOrRepeater(par1IBlockAccess, par2, par3 - 1, par4 + 1, -1);
-
-                if (!par1IBlockAccess.isBlockNormalCube(par2, par3 + 1, par4))
-                {
-                    if (par1IBlockAccess.isBlockNormalCube(par2 - 1, par3, par4) && isPoweredOrRepeater(par1IBlockAccess, par2 - 1, par3 + 1, par4, -1))
-                    {
-                        flag = true;
-                    }
-
-                    if (par1IBlockAccess.isBlockNormalCube(par2 + 1, par3, par4) && isPoweredOrRepeater(par1IBlockAccess, par2 + 1, par3 + 1, par4, -1))
-                    {
-                        flag1 = true;
-                    }
-
-                    if (par1IBlockAccess.isBlockNormalCube(par2, par3, par4 - 1) && isPoweredOrRepeater(par1IBlockAccess, par2, par3 + 1, par4 - 1, -1))
-                    {
-                        flag2 = true;
-                    }
-
-                    if (par1IBlockAccess.isBlockNormalCube(par2, par3, par4 + 1) && isPoweredOrRepeater(par1IBlockAccess, par2, par3 + 1, par4 + 1, -1))
-                    {
-                        flag3 = true;
-                    }
-                }
-
-                return !flag2 && !flag1 && !flag && !flag3 && par5 >= 2 && par5 <= 5 ? i1 : (par5 == 2 && flag2 && !flag && !flag1 ? i1 : (par5 == 3 && flag3 && !flag && !flag1 ? i1 : (par5 == 4 && flag && !flag2 && !flag3 ? i1 : (par5 == 5 && flag1 && !flag2 && !flag3 ? i1 : 0))));
-            }
-        }
-    }
-
-    /**
-     * Can this block provide power. Only wire currently seems to have this change based on its state.
-     */
-    public boolean canProvidePower()
-    {
-        return this.wiresProvidePower;
-    }
-
-    /**
-     * Returns true if redstone wire can connect to the specified block. Params: World, X, Y, Z, side (not a normal
-     * notch-side, this can be 0, 1, 2, 3 or -1)
-     */
-    public static boolean isPowerProviderOrWire(IBlockAccess par0IBlockAccess, int par1, int par2, int par3, int par4)
-    {
-        int i1 = par0IBlockAccess.getBlockId(par1, par2, par3);
-
-        if (i1 == Block.redstoneWire.blockID)
-        {
-            return true;
-        }
-        else if (i1 == 0)
-        {
-            return false;
-        }
-        else if (!Block.redstoneRepeaterIdle.func_94487_f(i1))
-        {
-            return (Block.blocksList[i1] != null && Block.blocksList[i1].canConnectRedstone(par0IBlockAccess, par1, par2, par3, par4));
-        }
-        else
-        {
-            int j1 = par0IBlockAccess.getBlockMetadata(par1, par2, par3);
-            return par4 == (j1 & 3) || par4 == Direction.footInvisibleFaceRemap[j1 & 3];
-        }
-    }
-
-
-    /**
-     * Ticks the block if it's been scheduled
-     */
-    public void updateTick(World par1World, int par2, int par3, int par4, Random par5Random)
-    {
-        if (!par1World.isRemote && this.powered && !par1World.isBlockIndirectlyGettingPowered(par2, par3, par4))
-        {
-            par1World.setBlock(par2, par3, par4, TimedOutput.CarrierLampOff.blockID, 0, 2);
-        }
-    }
-    
     /**
      * Sets the strength of the wire current (0-15) for this block based on neighboring blocks and propagates to
      * neighboring redstone wires
@@ -509,6 +200,311 @@ public class CarrierLamp extends Block
             par1World.notifyBlocksOfNeighborChange(par2, par3 + 1, par4, this.blockID);
         }
     }
+    
+    /**
+     * Called whenever the block is added into the world. Args: world, x, y, z
+     */
+    public void onBlockAdded(World par1World, int par2, int par3, int par4)
+    {
+    	super.onBlockAdded(par1World, par2, par3, par4);
+    	
+        if (!par1World.isRemote)
+        {
+        	
+        	this.updateAndPropagateCurrentStrength(par1World, par2, par3, par4);
+            par1World.notifyBlocksOfNeighborChange(par2, par3 + 1, par4, this.blockID);
+            par1World.notifyBlocksOfNeighborChange(par2, par3 - 1, par4, this.blockID);
+            this.notifyWireNeighborsOfNeighborChange(par1World, par2 - 1, par3, par4);
+            this.notifyWireNeighborsOfNeighborChange(par1World, par2 + 1, par3, par4);
+            this.notifyWireNeighborsOfNeighborChange(par1World, par2, par3, par4 - 1);
+            this.notifyWireNeighborsOfNeighborChange(par1World, par2, par3, par4 + 1);
+
+            if (par1World.isBlockNormalCube(par2 - 1, par3, par4))
+            {
+                this.notifyWireNeighborsOfNeighborChange(par1World, par2 - 1, par3 + 1, par4);
+            }
+            else
+            {
+                this.notifyWireNeighborsOfNeighborChange(par1World, par2 - 1, par3 - 1, par4);
+            }
+
+            if (par1World.isBlockNormalCube(par2 + 1, par3, par4))
+            {
+                this.notifyWireNeighborsOfNeighborChange(par1World, par2 + 1, par3 + 1, par4);
+            }
+            else
+            {
+                this.notifyWireNeighborsOfNeighborChange(par1World, par2 + 1, par3 - 1, par4);
+            }
+
+            if (par1World.isBlockNormalCube(par2, par3, par4 - 1))
+            {
+                this.notifyWireNeighborsOfNeighborChange(par1World, par2, par3 + 1, par4 - 1);
+            }
+            else
+            {
+                this.notifyWireNeighborsOfNeighborChange(par1World, par2, par3 - 1, par4 - 1);
+            }
+
+            if (par1World.isBlockNormalCube(par2, par3, par4 + 1))
+            {
+                this.notifyWireNeighborsOfNeighborChange(par1World, par2, par3 + 1, par4 + 1);
+            }
+            else
+            {
+                this.notifyWireNeighborsOfNeighborChange(par1World, par2, par3 - 1, par4 + 1);
+            }
+        	
+            if (this.powered && !par1World.isBlockIndirectlyGettingPowered(par2, par3, par4))
+            {
+                par1World.scheduleBlockUpdate(par2, par3, par4, this.blockID, 0);
+            }
+            else if (!this.powered && par1World.isBlockIndirectlyGettingPowered(par2, par3, par4))
+            {
+                par1World.setBlock(par2, par3, par4, TimedOutput.CarrierLampOn.blockID, 0, 2);
+            }
+        }
+        if (par1World.getBlockId(par2, par3, par4) == this.blockID)
+        {
+            par1World.notifyBlocksOfNeighborChange(par2, par3, par4, this.blockID);
+            par1World.notifyBlocksOfNeighborChange(par2 - 1, par3, par4, this.blockID);
+            par1World.notifyBlocksOfNeighborChange(par2 + 1, par3, par4, this.blockID);
+            par1World.notifyBlocksOfNeighborChange(par2, par3, par4 - 1, this.blockID);
+            par1World.notifyBlocksOfNeighborChange(par2, par3, par4 + 1, this.blockID);
+            par1World.notifyBlocksOfNeighborChange(par2, par3 - 1, par4, this.blockID);
+            par1World.notifyBlocksOfNeighborChange(par2, par3 + 1, par4, this.blockID);
+        }
+        
+        
+    }
+
+    /**
+     * ejects contained items into the world, and notifies neighbours of an update, as appropriate
+     */
+    public void breakBlock(World par1World, int par2, int par3, int par4, int par5, int par6)
+    {
+        super.breakBlock(par1World, par2, par3, par4, par5, par6);
+
+        if (!par1World.isRemote)
+        {
+            par1World.notifyBlocksOfNeighborChange(par2, par3 + 1, par4, this.blockID);
+            par1World.notifyBlocksOfNeighborChange(par2, par3 - 1, par4, this.blockID);
+            par1World.notifyBlocksOfNeighborChange(par2 + 1, par3, par4, this.blockID);
+            par1World.notifyBlocksOfNeighborChange(par2 - 1, par3, par4, this.blockID);
+            par1World.notifyBlocksOfNeighborChange(par2, par3, par4 + 1, this.blockID);
+            par1World.notifyBlocksOfNeighborChange(par2, par3, par4 - 1, this.blockID);
+            this.updateAndPropagateCurrentStrength(par1World, par2, par3, par4);
+            this.notifyWireNeighborsOfNeighborChange(par1World, par2 - 1, par3, par4);
+            this.notifyWireNeighborsOfNeighborChange(par1World, par2 + 1, par3, par4);
+            this.notifyWireNeighborsOfNeighborChange(par1World, par2, par3, par4 - 1);
+            this.notifyWireNeighborsOfNeighborChange(par1World, par2, par3, par4 + 1);
+
+            if (par1World.isBlockNormalCube(par2 - 1, par3, par4))
+            {
+                this.notifyWireNeighborsOfNeighborChange(par1World, par2 - 1, par3 + 1, par4);
+            }
+            else
+            {
+                this.notifyWireNeighborsOfNeighborChange(par1World, par2 - 1, par3 - 1, par4);
+            }
+
+            if (par1World.isBlockNormalCube(par2 + 1, par3, par4))
+            {
+                this.notifyWireNeighborsOfNeighborChange(par1World, par2 + 1, par3 + 1, par4);
+            }
+            else
+            {
+                this.notifyWireNeighborsOfNeighborChange(par1World, par2 + 1, par3 - 1, par4);
+            }
+
+            if (par1World.isBlockNormalCube(par2, par3, par4 - 1))
+            {
+                this.notifyWireNeighborsOfNeighborChange(par1World, par2, par3 + 1, par4 - 1);
+            }
+            else
+            {
+                this.notifyWireNeighborsOfNeighborChange(par1World, par2, par3 - 1, par4 - 1);
+            }
+
+            if (par1World.isBlockNormalCube(par2, par3, par4 + 1))
+            {
+                this.notifyWireNeighborsOfNeighborChange(par1World, par2, par3 + 1, par4 + 1);
+            }
+            else
+            {
+                this.notifyWireNeighborsOfNeighborChange(par1World, par2, par3 - 1, par4 + 1);
+            }
+        }
+    }
+
+    /**
+     * Returns the current strength at the specified block if it is greater than the passed value, or the passed value
+     * otherwise. Signature: (world, x, y, z, strength)
+     */
+    private int getMaxCurrentStrength(World par1World, int par2, int par3, int par4, int par5)
+    {
+        if (par1World.getBlockId(par2, par3, par4) != this.blockID)
+        {
+            return par5;
+        }
+        else
+        {
+            int i1 = par1World.getBlockMetadata(par2, par3, par4);
+            return i1 > par5 ? i1 : par5;
+        }
+    }
+
+    /**
+     * Lets the block know when one of its neighbor changes. Doesn't know which neighbor changed (coordinates passed are
+     * their own) Args: x, y, z, neighbor blockID
+     */
+    public void onNeighborBlockChange(World par1World, int par2, int par3, int par4, int par5)
+    {
+        if (!par1World.isRemote)
+        {
+            boolean flag = this.canPlaceBlockAt(par1World, par2, par3, par4);
+
+            if (flag)
+            {
+                this.updateAndPropagateCurrentStrength(par1World, par2, par3, par4);
+            }
+            else
+            {
+                this.dropBlockAsItem(par1World, par2, par3, par4, 0, 100);
+                par1World.setBlockToAir(par2, par3, par4);
+            }
+
+            super.onNeighborBlockChange(par1World, par2, par3, par4, par5);
+        }
+     {
+            if (this.powered && !par1World.isBlockIndirectlyGettingPowered(par2, par3, par4))
+            {
+                par1World.scheduleBlockUpdate(par2, par3, par4, this.blockID, 100);
+            }
+            else if (!this.powered && par1World.isBlockIndirectlyGettingPowered(par2, par3, par4))
+            {
+                par1World.setBlock(par2, par3, par4, TimedOutput.CarrierLampOn.blockID, 0, 2);
+            }
+        }
+     }
+
+
+    
+    /**
+     * Returns true if the block is emitting direct/strong redstone power on the specified side. Args: World, X, Y, Z,
+     * side. Note that the side is reversed - eg it is 1 (up) when checking the bottom of the block.
+     */
+    public int isProvidingStrongPower(IBlockAccess par1IBlockAccess, int par2, int par3, int par4, int par5)
+    {
+        return !this.wiresProvidePower ? 0 : this.isProvidingWeakPower(par1IBlockAccess, par2, par3, par4, par5);
+    }
+
+    /**
+     * Returns true if the block is emitting indirect/weak redstone power on the specified side. If isBlockNormalCube
+     * returns true, standard redstone propagation rules will apply instead and this will not be called. Args: World, X,
+     * Y, Z, side. Note that the side is reversed - eg it is 1 (up) when checking the bottom of the block.
+     */
+    public int isProvidingWeakPower(IBlockAccess par1IBlockAccess, int par2, int par3, int par4, int par5)
+    {
+        if (!this.wiresProvidePower)
+        {
+            return 0;
+        }
+        else
+        {
+            int i1 = par1IBlockAccess.getBlockMetadata(par2, par3, par4);
+
+            if (i1 == 0)
+            {
+                return 0;
+            }
+            else if (par5 == 1)
+            {
+                return i1;
+            }
+            else
+            {
+                boolean flag = isPoweredOrRepeater(par1IBlockAccess, par2 - 1, par3, par4, 1) || !par1IBlockAccess.isBlockNormalCube(par2 - 1, par3, par4) && isPoweredOrRepeater(par1IBlockAccess, par2 - 1, par3 - 1, par4, -1);
+                boolean flag1 = isPoweredOrRepeater(par1IBlockAccess, par2 + 1, par3, par4, 3) || !par1IBlockAccess.isBlockNormalCube(par2 + 1, par3, par4) && isPoweredOrRepeater(par1IBlockAccess, par2 + 1, par3 - 1, par4, -1);
+                boolean flag2 = isPoweredOrRepeater(par1IBlockAccess, par2, par3, par4 - 1, 2) || !par1IBlockAccess.isBlockNormalCube(par2, par3, par4 - 1) && isPoweredOrRepeater(par1IBlockAccess, par2, par3 - 1, par4 - 1, -1);
+                boolean flag3 = isPoweredOrRepeater(par1IBlockAccess, par2, par3, par4 + 1, 0) || !par1IBlockAccess.isBlockNormalCube(par2, par3, par4 + 1) && isPoweredOrRepeater(par1IBlockAccess, par2, par3 - 1, par4 + 1, -1);
+
+                if (!par1IBlockAccess.isBlockNormalCube(par2, par3 + 1, par4))
+                {
+                    if (par1IBlockAccess.isBlockNormalCube(par2 - 1, par3, par4) && isPoweredOrRepeater(par1IBlockAccess, par2 - 1, par3 + 1, par4, -1))
+                    {
+                        flag = true;
+                    }
+
+                    if (par1IBlockAccess.isBlockNormalCube(par2 + 1, par3, par4) && isPoweredOrRepeater(par1IBlockAccess, par2 + 1, par3 + 1, par4, -1))
+                    {
+                        flag1 = true;
+                    }
+
+                    if (par1IBlockAccess.isBlockNormalCube(par2, par3, par4 - 1) && isPoweredOrRepeater(par1IBlockAccess, par2, par3 + 1, par4 - 1, -1))
+                    {
+                        flag2 = true;
+                    }
+
+                    if (par1IBlockAccess.isBlockNormalCube(par2, par3, par4 + 1) && isPoweredOrRepeater(par1IBlockAccess, par2, par3 + 1, par4 + 1, -1))
+                    {
+                        flag3 = true;
+                    }
+                }
+
+                return !flag2 && !flag1 && !flag && !flag3 && par5 >= 2 && par5 <= 5 ? i1 : (par5 == 2 && flag2 && !flag && !flag1 ? i1 : (par5 == 3 && flag3 && !flag && !flag1 ? i1 : (par5 == 4 && flag && !flag2 && !flag3 ? i1 : (par5 == 5 && flag1 && !flag2 && !flag3 ? i1 : 0))));
+            }
+        }
+    }
+
+    /**
+     * Can this block provide power. Only wire currently seems to have this change based on its state.
+     */
+    public boolean canProvidePower()
+    {
+        return this.wiresProvidePower;
+    }
+
+    /**
+     * Returns true if redstone wire can connect to the specified block. Params: World, X, Y, Z, side (not a normal
+     * notch-side, this can be 0, 1, 2, 3 or -1)
+     */
+    public static boolean isPowerProviderOrWire(IBlockAccess par0IBlockAccess, int par1, int par2, int par3, int par4)
+    {
+        int i1 = par0IBlockAccess.getBlockId(par1, par2, par3);
+
+        if (i1 == Block.redstoneWire.blockID)
+        {
+            return true;
+        }
+        else if (i1 == 0)
+        {
+            return false;
+        }
+        else if (!Block.redstoneRepeaterIdle.func_94487_f(i1))
+        {
+            return (Block.blocksList[i1] != null && Block.blocksList[i1].canConnectRedstone(par0IBlockAccess, par1, par2, par3, par4));
+        }
+        else
+        {
+            int j1 = par0IBlockAccess.getBlockMetadata(par1, par2, par3);
+            return par4 == (j1 & 3) || par4 == Direction.footInvisibleFaceRemap[j1 & 3];
+        }
+    }
+
+
+    /**
+     * Ticks the block if it's been scheduled
+     */
+    public void updateTick(World par1World, int par2, int par3, int par4, Random par5Random)
+    {
+        if (!par1World.isRemote && this.powered && !par1World.isBlockIndirectlyGettingPowered(par2, par3, par4))
+        {
+            par1World.setBlock(par2, par3, par4, TimedOutput.CarrierLampOff.blockID, 0, 2);
+        }
+    }
+    
+    
 
     @SideOnly(Side.CLIENT)
 
