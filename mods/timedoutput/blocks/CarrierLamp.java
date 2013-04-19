@@ -298,8 +298,6 @@ public class CarrierLamp extends Block
             this.notifyWireNeighborsOfNeighborChange(par1World, par2 + 1, par3, par4);
             this.notifyWireNeighborsOfNeighborChange(par1World, par2, par3, par4 - 1);
             this.notifyWireNeighborsOfNeighborChange(par1World, par2, par3, par4 + 1);
-            this.notifyWireNeighborsOfNeighborChange(par1World, par2, par3 - 1, par4);
-            this.notifyWireNeighborsOfNeighborChange(par1World, par2, par3 + 1, par4);
 
             if (par1World.isBlockNormalCube(par2 - 1, par3, par4))
             {
@@ -336,8 +334,6 @@ public class CarrierLamp extends Block
             {
                 this.notifyWireNeighborsOfNeighborChange(par1World, par2, par3 - 1, par4 + 1);
             }
-            
-            
         }
     }
 
@@ -374,7 +370,7 @@ public class CarrierLamp extends Block
             }
             else
             {
-                this.dropBlockAsItem(par1World, par2, par3, par4, 0, 0);
+                this.dropBlockAsItem(par1World, par2, par3, par4, 0, 100);
                 par1World.setBlockToAir(par2, par3, par4);
             }
 
