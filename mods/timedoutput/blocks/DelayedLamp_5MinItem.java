@@ -15,9 +15,9 @@ public class DelayedLamp_5MinItem extends ItemBlock {
 	}
 	public String getUnlocalizedName(ItemStack i){
         switch(i.getItemDamage()){
-        case 0:return "DelayedLamp_10SecOff";
-        case 1:return "DelayedLamp_10SecOn";
-        default:return "DelayedLamp_10SecOff";
+        case 0:return "DelayedLamp_5MinOff";
+        case 1:return "DelayedLamp_5MinOn";
+        default:return "DelayedLamp_5MinOff";
         }
 	}
 	public int getMetadata(int meta){
